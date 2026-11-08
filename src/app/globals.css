@@ -1,8 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fbf8f1;
+  --foreground: #11212e;
+
+  /* Brand: "Samarkand teal" + "Registan gold" -- swap freely later */
+  --color-brand-50: #eef7f6;
+  --color-brand-100: #d6ece9;
+  --color-brand-200: #aed9d4;
+  --color-brand-300: #7ec2bb;
+  --color-brand-400: #4aa59c;
+  --color-brand-500: #248a81;
+  --color-brand-600: #0f6e68;
+  --color-brand-700: #0c5753;
+  --color-brand-800: #0a4542;
+  --color-brand-900: #083836;
+  --color-brand-950: #042120;
+
+  --color-accent-50: #fdf6e8;
+  --color-accent-100: #faebc4;
+  --color-accent-200: #f4d788;
+  --color-accent-300: #edc157;
+  --color-accent-400: #e4a62b;
+  --color-accent-500: #cc8c17;
+  --color-accent-600: #a66e10;
+  --color-accent-700: #7f5410;
+  --color-accent-800: #5c3d0f;
+  --color-accent-900: #402b0c;
+
+  --color-ink-50: #f4f6f7;
+  --color-ink-100: #e4e9eb;
+  --color-ink-300: #a9b6bc;
+  --color-ink-500: #5a6e76;
+  --color-ink-700: #324450;
+  --color-ink-900: #11212e;
+  --color-ink-950: #0a141c;
+
+  --color-paper: #fbf8f1;
+  --color-paper-dim: #f3eee1;
 }
 
 @theme inline {
@@ -10,17 +45,48 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-brand-50: var(--color-brand-50);
+  --color-brand-100: var(--color-brand-100);
+  --color-brand-200: var(--color-brand-200);
+  --color-brand-300: var(--color-brand-300);
+  --color-brand-400: var(--color-brand-400);
+  --color-brand-500: var(--color-brand-500);
+  --color-brand-600: var(--color-brand-600);
+  --color-brand-700: var(--color-brand-700);
+  --color-brand-800: var(--color-brand-800);
+  --color-brand-900: var(--color-brand-900);
+  --color-brand-950: var(--color-brand-950);
+
+  --color-accent-50: var(--color-accent-50);
+  --color-accent-100: var(--color-accent-100);
+  --color-accent-200: var(--color-accent-200);
+  --color-accent-300: var(--color-accent-300);
+  --color-accent-400: var(--color-accent-400);
+  --color-accent-500: var(--color-accent-500);
+  --color-accent-600: var(--color-accent-600);
+  --color-accent-700: var(--color-accent-700);
+  --color-accent-800: var(--color-accent-800);
+  --color-accent-900: var(--color-accent-900);
+
+  --color-ink-50: var(--color-ink-50);
+  --color-ink-100: var(--color-ink-100);
+  --color-ink-300: var(--color-ink-300);
+  --color-ink-500: var(--color-ink-500);
+  --color-ink-700: var(--color-ink-700);
+  --color-ink-900: var(--color-ink-900);
+  --color-ink-950: var(--color-ink-950);
+
+  --color-paper: var(--color-paper);
+  --color-paper-dim: var(--color-paper-dim);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+.text-balance {
+  text-wrap: balance;
 }
