@@ -419,3 +419,212 @@ create index on case_studies (school_id);
 create index on mentors (school_id);
 create index on messages (conversation_id);
 create index on institution_students (institution_id);
+
+-- ============================================================
+-- Follow-up migrations (applied in this order after the base schema above)
+-- ============================================================
+
+-- migration: loosen_catalog_refs
+-- Catalog content (schools, scholarships, mentors, lessons, quizzes, archetypes,
+-- case studies, journal prompts) ships as static data in src/lib/seed-data.ts,
+-- not as DB rows -- only user-generated/mutable data lives in Postgres. These
+-- columns reference those static string ids, so they're plain text, not FKs.
+alter table profiles drop constraint if exists profiles_archetype_fk;
+alter table profiles alter column archetype_id type text using archetype_id::text;
+alter table college_list_entries drop constraint if exists college_list_entries_school_id_fkey;
+alter table college_list_entries alter column school_id type text using school_id::text;
+alter table college_list_entries alter column school_id set not null;
+alter table essays drop constraint if exists essays_school_id_fkey;
+alter table essays alter column school_id type text using school_id::text;
+alter table scholarship_matches drop constraint if exists scholarship_matches_scholarship_id_fkey;
+alter table scholarship_matches alter column scholarship_id type text using scholarship_id::text;
+alter table scholarship_matches alter column scholarship_id set not null;
+alter table lesson_progress drop constraint if exists lesson_progress_lesson_id_fkey;
+alter table lesson_progress alter column lesson_id type text using lesson_id::text;
+alter table lesson_progress alter column lesson_id set not null;
+alter table quiz_responses drop constraint if exists quiz_responses_quiz_id_fkey;
+alter table quiz_responses alter column quiz_id type text using quiz_id::text;
+alter table quiz_responses alter column quiz_id set not null;
+alter table conversations drop constraint if exists conversations_mentor_id_fkey;
+alter table conversations alter column mentor_id type text using mentor_id::text;
+alter table conversations alter column mentor_id set not null;
+alter table institution_students drop constraint if exists institution_students_institution_id_fkey;
+alter table institution_students alter column institution_id type text using institution_id::text;
+alter table institution_members drop constraint if exists institution_members_institution_id_fkey;
+alter table institution_members alter column institution_id type text using institution_id::text;
+
+-- migration: loosen_journal_prompt_ref
+alter table journal_entries drop constraint if exists journal_entries_prompt_id_fkey;
+alter table journal_entries alter column prompt_id type text using prompt_id::text;
+
+-- migration: messages_sender_kind
+-- Mentors aren't real auth users yet, so a "mentor reply" is inserted using
+-- the student's own session. Need an explicit flag to tell the two apart.
+alter table messages add column sender_kind text not null default 'student' check (sender_kind in ('student', 'mentor'));
+
+-- migration: allow_demo_profiles
+-- Allow display-only demo profiles (no matching auth.users row) so the
+-- counselor dashboard can show a populated caseload. Real signups still get
+-- profiles via the on_auth_user_created trigger below.
+alter table profiles drop constraint if exists profiles_id_fkey;
+
+-- migration: lock_unused_catalog_tables
+-- These tables aren't queried via the API at all (catalog content ships as
+-- static data). Enable RLS with no policies so they're fully inaccessible.
+alter table schools enable row level security;
+alter table school_deadlines enable row level security;
+alter table archetypes enable row level security;
+alter table quizzes enable row level security;
+alter table quiz_questions enable row level security;
+alter table lessons enable row level security;
+alter table journal_prompts enable row level security;
+alter table draft_reviews enable row level security;
+alter table scholarships enable row level security;
+alter table case_studies enable row level security;
+alter table mentors enable row level security;
+alter table institutions enable row level security;
+alter table meetings enable row level security;
+alter table institution_members enable row level security;
+
+-- migration: row_level_security
+-- Every other table defaults to RLS-locked; only an explicit policy below
+-- opens it up. Student-owned tables: student can read/write their own rows.
+-- A few additionally allow any authenticated user to SELECT, to power the
+-- counselor demo dashboard (see src/app/maslahatchi -- any signed-in user
+-- can view it today; a real rollout would scope this to counselor roles).
+
+alter table profiles enable row level security;
+create policy "profiles_select_any_authenticated" on profiles for select to authenticated using (true);
+create policy "profiles_insert_own" on profiles for insert to authenticated with check (auth.uid() = id);
+create policy "profiles_update_own" on profiles for update to authenticated using (auth.uid() = id);
+
+alter table streaks enable row level security;
+create policy "streaks_select_any_authenticated" on streaks for select to authenticated using (true);
+create policy "streaks_upsert_own" on streaks for insert to authenticated with check (auth.uid() = user_id);
+create policy "streaks_update_own" on streaks for update to authenticated using (auth.uid() = user_id);
+
+alter table lesson_progress enable row level security;
+create policy "lesson_progress_select_any_authenticated" on lesson_progress for select to authenticated using (true);
+create policy "lesson_progress_insert_own" on lesson_progress for insert to authenticated with check (auth.uid() = user_id);
+create policy "lesson_progress_update_own" on lesson_progress for update to authenticated using (auth.uid() = user_id);
+
+alter table essays enable row level security;
+create policy "essays_select_any_authenticated" on essays for select to authenticated using (true);
+create policy "essays_write_own" on essays for insert to authenticated with check (auth.uid() = user_id);
+create policy "essays_update_own" on essays for update to authenticated using (auth.uid() = user_id);
+create policy "essays_delete_own" on essays for delete to authenticated using (auth.uid() = user_id);
+
+alter table essay_feedback enable row level security;
+create policy "essay_feedback_select_any_authenticated" on essay_feedback for select to authenticated using (true);
+create policy "essay_feedback_insert_own_essay" on essay_feedback for insert to authenticated
+  with check (exists (select 1 from essays where essays.id = essay_id and essays.user_id = auth.uid()));
+
+alter table college_list_entries enable row level security;
+create policy "college_list_select_any_authenticated" on college_list_entries for select to authenticated using (true);
+create policy "college_list_insert_own" on college_list_entries for insert to authenticated with check (auth.uid() = user_id);
+create policy "college_list_update_own" on college_list_entries for update to authenticated using (auth.uid() = user_id);
+create policy "college_list_delete_own" on college_list_entries for delete to authenticated using (auth.uid() = user_id);
+
+alter table institution_students enable row level security;
+create policy "institution_students_select_any_authenticated" on institution_students for select to authenticated using (true);
+create policy "institution_students_insert_own" on institution_students for insert to authenticated with check (auth.uid() = student_id);
+
+alter table quiz_responses enable row level security;
+create policy "quiz_responses_own" on quiz_responses for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+alter table safety_nest_contacts enable row level security;
+create policy "safety_nest_own" on safety_nest_contacts for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+alter table journal_entries enable row level security;
+create policy "journal_entries_own" on journal_entries for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+alter table essay_topic_suggestions enable row level security;
+create policy "essay_topic_suggestions_own" on essay_topic_suggestions for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+alter table extracurriculars enable row level security;
+create policy "extracurriculars_own" on extracurriculars for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+alter table recommenders enable row level security;
+create policy "recommenders_own" on recommenders for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+alter table scholarship_matches enable row level security;
+create policy "scholarship_matches_own" on scholarship_matches for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+alter table ruby_wallets enable row level security;
+create policy "ruby_wallets_own" on ruby_wallets for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+alter table ruby_transactions enable row level security;
+create policy "ruby_transactions_own" on ruby_transactions for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+alter table subscriptions enable row level security;
+create policy "subscriptions_own" on subscriptions for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+alter table conversations enable row level security;
+create policy "conversations_own" on conversations for all to authenticated
+  using (auth.uid() = student_id) with check (auth.uid() = student_id);
+
+alter table messages enable row level security;
+create policy "messages_select_own_conversation" on messages for select to authenticated
+  using (exists (select 1 from conversations where conversations.id = conversation_id and conversations.student_id = auth.uid()));
+create policy "messages_insert_own_conversation" on messages for insert to authenticated
+  with check (exists (select 1 from conversations where conversations.id = conversation_id and conversations.student_id = auth.uid()));
+
+-- Parent payment links: the parent clicks a link while signed out (or from a
+-- browser where the student is still logged in), so both anon and
+-- authenticated need token-based access -- same trust model as a
+-- password-reset email link. A real launch would move "mark paid" behind a
+-- server-only webhook instead of exposing update by token at all.
+alter table parent_payment_links enable row level security;
+create policy "parent_payment_links_select_own" on parent_payment_links for select to authenticated using (auth.uid() = student_id);
+create policy "parent_payment_links_insert_own" on parent_payment_links for insert to authenticated with check (auth.uid() = student_id);
+create policy "parent_payment_links_select_by_token" on parent_payment_links for select to public using (true);
+create policy "parent_payment_links_update_by_token" on parent_payment_links for update to public using (true);
+
+-- migration: auto_provision_new_user
+-- auth.signUp() may return before a session exists (email confirmation
+-- pending), so a client-side insert into profiles right after signUp can run
+-- as the anon role and get rejected by RLS. Standard Supabase fix: a
+-- SECURITY DEFINER trigger on auth.users that provisions everything
+-- server-side, regardless of confirmation timing. full_name/username come in
+-- via signUp()'s options.data (raw_user_meta_data).
+
+create or replace function public.handle_new_user()
+returns trigger
+language plpgsql
+security definer set search_path = public
+as $$
+begin
+  insert into public.profiles (id, full_name, username, role)
+  values (
+    new.id,
+    coalesce(new.raw_user_meta_data->>'full_name', ''),
+    coalesce(new.raw_user_meta_data->>'username', 'user_' || substr(new.id::text, 1, 8)),
+    'student'
+  );
+  insert into public.streaks (user_id) values (new.id);
+  insert into public.ruby_wallets (user_id, balance) values (new.id, 15);
+  insert into public.ruby_transactions (user_id, amount, type) values (new.id, 15, 'grant');
+  insert into public.institution_students (institution_id, student_id) values ('inst_demo', new.id);
+  return new;
+end;
+$$;
+
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function public.handle_new_user();
+
+revoke execute on function public.handle_new_user() from public;
+
+-- Narrow, SECURITY DEFINER-scoped username-availability check: callable by
+-- anon (the signup form, before a session exists) without exposing any
+-- profile row data, unlike a plain SELECT policy would.
+create or replace function public.is_username_taken(check_username text)
+returns boolean
+language sql
+security definer set search_path = public
+stable
+as $$
+  select exists (select 1 from public.profiles where username = check_username);
+$$;
+
+grant execute on function public.is_username_taken(text) to anon, authenticated;

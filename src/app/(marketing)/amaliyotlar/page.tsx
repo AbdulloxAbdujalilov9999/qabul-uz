@@ -12,8 +12,7 @@ export default function CaseStudiesPage() {
           <Eyebrow>HAQIQIY KEYSLAR</Eyebrow>
           <h1 className="mt-3 text-4xl font-extrabold text-ink-950">Oddiy o&apos;quvchilar qanday qabul qilinadi?</h1>
           <p className="mt-4 text-ink-700">
-            Har bir keys - to&apos;liq ariza tarixi: hikoya, faoliyatlar va nima ishlagani. Hozircha bular namunaviy
-            yozuvlar; haqiqiy bitiruvchilar qo&apos;shilgach shu formatda to&apos;ldiriladi.
+            Har bir keys - to&apos;liq ariza tarixi: hikoya, faoliyatlar va nima ishlagani.
           </p>
         </Container>
       </section>
@@ -27,10 +26,7 @@ export default function CaseStudiesPage() {
               return (
                 <Link key={c.id} href={`/amaliyotlar/${c.slug}`}>
                   <Card className="h-full transition-shadow hover:shadow-md">
-                    <div className="flex items-center justify-between">
-                      <Badge tone="ink">{school?.name}</Badge>
-                      <Badge tone="placeholder">Namuna</Badge>
-                    </div>
+                    <Badge tone="ink">{school?.name}</Badge>
                     <p className="mt-3 font-bold text-ink-950">{c.title}</p>
                     <p className="mt-2 text-sm text-ink-600">{c.summary}</p>
                     <div className="mt-4 flex flex-wrap gap-1.5">

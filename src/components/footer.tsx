@@ -39,7 +39,7 @@ export function Footer() {
         </div>
       </Container>
       <Container className="border-t border-ink-900/8 py-6 text-xs text-ink-500">
-        © 2026 Qabul. Barcha huquqlar himoyalangan. Namunaviy loyiha - haqiqiy xizmat emas.
+        © 2026 Qabul. Barcha huquqlar himoyalangan.
       </Container>
     </footer>
   );

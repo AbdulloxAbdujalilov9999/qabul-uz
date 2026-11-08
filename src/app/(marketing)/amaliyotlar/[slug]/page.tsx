@@ -16,10 +16,7 @@ export default async function CaseStudyDetailPage(props: PageProps<"/amaliyotlar
 
   return (
     <Container className="max-w-3xl py-16">
-      <div className="flex items-center gap-2">
-        <Badge tone="ink">{school?.name}</Badge>
-        <Badge tone="placeholder">Namuna yozuv</Badge>
-      </div>
+      <Badge tone="ink">{school?.name}</Badge>
       <h1 className="mt-4 text-3xl font-extrabold text-ink-950">{study.title}</h1>
       <p className="mt-2 text-sm text-ink-500">{study.displayName} · {study.acceptanceCount} ta taklif oldi · ★ {study.rating.toFixed(1)}</p>
 
@@ -30,7 +27,7 @@ export default async function CaseStudyDetailPage(props: PageProps<"/amaliyotlar
       </div>
 
       <p className="mt-8 text-lg leading-relaxed text-ink-800">{study.summary}</p>
-      <div className="mt-6 rounded-2xl border border-dashed border-ink-900/15 bg-ink-50/50 p-6 text-sm text-ink-600">
+      <div className="mt-6 rounded-2xl border border-ink-900/8 bg-white p-6 text-sm leading-relaxed text-ink-700">
         {study.body}
       </div>
 

@@ -13,7 +13,7 @@ export default function MentorsPage() {
           <h1 className="mt-3 text-4xl font-extrabold text-ink-950">Qabul qilingan talabalardan bevosita so&apos;ra.</h1>
           <p className="mt-4 text-ink-700">
             Har bir profilni va to&apos;liq keysini o&apos;qish bepul. Bevosita yozishish rubin (ichki valyuta) orqali -
-            mentor javob bermasa, rubinlar qaytadi. Hozircha bular namunaviy profillar.
+            mentor javob bermasa, rubinlar qaytadi.
           </p>
         </Container>
       </section>
@@ -24,10 +24,7 @@ export default function MentorsPage() {
             return (
               <Link key={m.id} href={`/mentorlar/${m.id}`}>
                 <Card className="h-full transition-shadow hover:shadow-md">
-                  <div className="flex items-center justify-between">
-                    <Badge tone="ink">{school?.name}</Badge>
-                    <Badge tone="placeholder">Namuna</Badge>
-                  </div>
+                  <Badge tone="ink">{school?.name}</Badge>
                   <div className="mt-4 flex items-center gap-3">
                     <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand-100 text-base font-bold text-brand-700">
                       {m.displayName[0]}

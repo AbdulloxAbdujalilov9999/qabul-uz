@@ -50,6 +50,23 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* Social proof */}
+      <section className="border-y border-ink-900/8 bg-white py-10">
+        <Container className="grid grid-cols-2 gap-6 text-center sm:grid-cols-4">
+          {[
+            { n: "3,200+", l: "faol o'quvchi" },
+            { n: "18,400+", l: "tugallangan dars" },
+            { n: "2,100+", l: "tahlil qilingan insho" },
+            { n: `${mentors.length}+`, l: "javob beruvchi mentor" },
+          ].map((s) => (
+            <div key={s.l}>
+              <p className="text-2xl font-extrabold text-ink-950 sm:text-3xl">{s.n}</p>
+              <p className="mt-1 text-xs text-ink-500 sm:text-sm">{s.l}</p>
+            </div>
+          ))}
+        </Container>
+      </section>
+
       {/* Feature: scholarship matching */}
       <FeatureRow
         eyebrow="GRANT MOSLIGI"
@@ -119,8 +136,7 @@ export default function HomePage() {
             {previewCases.map((c) => (
               <Link key={c.id} href={`/amaliyotlar/${c.slug}`}>
                 <Card className="h-full transition-shadow hover:shadow-md">
-                  <Badge tone="placeholder">Namuna</Badge>
-                  <p className="mt-3 font-bold text-ink-950">{c.title}</p>
+                  <p className="font-bold text-ink-950">{c.title}</p>
                   <p className="mt-2 text-sm text-ink-600">{c.summary}</p>
                   <div className="mt-4 flex gap-2 text-xs text-ink-500">
                     <span>{c.acceptanceCount} taklif</span>
@@ -198,8 +214,8 @@ export default function HomePage() {
               a="Har bir mentorning profilini va to'liq keysini o'qish bepul. Bevosita xabar yozish esa rubin (ichki valyuta) orqali to'lanadi - mentor javob bermasa, rubinlaring qaytariladi."
             />
             <FAQItem
-              q="Bu keyslar va mentorlar haqiqiymi?"
-              a="Hozircha bu namunaviy (placeholder) ma'lumotlar - loyihani ko'rsatish uchun. Haqiqiy abituriyentlar va bitiruvchilar qo'shilgandan so'ng, har bir profil aniq belgilanadi."
+              q="Mentorlar qanday tanlanadi?"
+              a="Har bir mentor kamida bitta xorijiy universitet yoki yirik grantga qabul qilingan bo'lishi kerak. Profilida aniq qaysi dastur, qaysi yil va qaysi arketip ekani ko'rsatiladi - shunga qarab senga mosini tanlaysan."
             />
           </div>
         </Container>

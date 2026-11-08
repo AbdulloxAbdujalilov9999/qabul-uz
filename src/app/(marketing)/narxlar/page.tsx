@@ -92,7 +92,7 @@ export default function PricingPage() {
               </tbody>
             </table>
           </div>
-          <p className="mt-3 text-xs text-ink-500">Raqamlar bozor o&apos;rtachasiga asoslangan taxminiy ko&apos;rsatkich, namunaviy loyiha uchun.</p>
+          <p className="mt-3 text-xs text-ink-500">Raqamlar bozor o&apos;rtachasiga asoslangan taxminiy ko&apos;rsatkich.</p>
         </Container>
       </section>
 

@@ -34,7 +34,7 @@ export default async function ParentPayPage(props: PageProps<"/ota-ona/[token]">
               </button>
             </form>
             <p className="mt-3 text-xs text-ink-400">
-              Namunaviy loyihada haqiqiy to&apos;lov tizimi (Click/Payme) ulanmagan - bu tugma faqat oqimni ko&apos;rsatadi.
+              To&apos;lov tizimi (Click/Payme) hozircha ulanmagan - bu tugma demo rejimda ishlaydi.
             </p>
           </>
         )}

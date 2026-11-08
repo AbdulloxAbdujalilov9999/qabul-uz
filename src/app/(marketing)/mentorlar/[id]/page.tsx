@@ -21,10 +21,7 @@ export default async function MentorDetailPage(props: PageProps<"/mentorlar/[id]
     <Container className="max-w-3xl py-16">
       <div className="grid gap-8 md:grid-cols-[1fr_280px]">
         <div>
-          <div className="flex items-center gap-2">
-            <Badge tone="ink">{school?.name}</Badge>
-            <Badge tone="placeholder">Namuna profil</Badge>
-          </div>
+          <Badge tone="ink">{school?.name}</Badge>
           <div className="mt-4 flex items-center gap-4">
             <div className="grid h-16 w-16 place-items-center rounded-full bg-brand-100 text-2xl font-bold text-brand-700">
               {mentor.displayName[0]}

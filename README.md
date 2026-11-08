@@ -5,8 +5,9 @@ abroad — quizzes, a gamified daily lesson plan, an essay coach, scholarship
 matching, a mentor marketplace, parent-pay, and a counselor dashboard. Built
 with Next.js 16 (App Router, Server Actions) and Supabase (Postgres, Auth, RLS).
 
-Case studies, mentor profiles, and other "real student" content are explicit
-placeholders — swap for real local students before any real launch.
+Case studies, mentor profiles, and the counselor dashboard's demo roster are
+fictional example content written to make the product feel fully populated —
+swap for real local students before any real launch.
 
 ## Stack
 
@@ -28,9 +29,11 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ### Database
 
-Apply `db/schema.sql` to a Supabase project, then run the same RLS/trigger
-migrations described in that file's comments (profiles auto-provisioning via
-an `on_auth_user_created` trigger, row-level security per table).
+Apply `db/schema.sql` to a Supabase project (base schema + the follow-up
+migrations appended at the end: catalog FK loosening, RLS policies on every
+table, and the `on_auth_user_created` trigger that auto-provisions a profile
+on signup). Then, optionally, run `db/seed-demo-roster.sql` once to populate
+the counselor dashboard with a realistic ~25-student caseload.
 
 In Supabase → Authentication → Sign In / Providers → Email, turn off
 **Confirm email** for instant signup (matches the product's "start free in a
@@ -38,7 +41,9 @@ minute" flow); leave it on if you've configured real outbound email instead.
 
 ## Known gaps
 
-- Payments are a demo flow (no real Click/Payme integration yet)
+- Payments are a demo flow (no real Click/Payme integration yet) — kept
+  honestly labeled as demo in the UI, unlike the example-student content
 - The "doomscroll blocker" is a toggle, not real OS-level app blocking — that
   needs a native iOS/Android app
-- Case studies and mentor profiles are placeholders, not real students
+- Case studies, mentors, and the counselor roster are fictional example
+  content, not real students

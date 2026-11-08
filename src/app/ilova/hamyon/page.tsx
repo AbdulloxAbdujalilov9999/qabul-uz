@@ -38,7 +38,7 @@ export default async function WalletPage() {
             </form>
           ))}
         </div>
-        <p className="mt-3 text-xs text-ink-400">Namunaviy loyihada haqiqiy to&apos;lov tizimi ulanmagan - bu tugmalar demo uchun.</p>
+        <p className="mt-3 text-xs text-ink-400">To&apos;lov tizimi hozircha ulanmagan - bu tugmalar demo rejimda ishlaydi.</p>
       </Card>
 
       <div>
