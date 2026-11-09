@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getSessionUserId } from "@/lib/session";
 import { getProfile } from "@/lib/db";
+import { logOutAction } from "@/lib/actions/auth";
 import { Container, Button } from "./ui";
 
 const links = [
@@ -36,9 +37,11 @@ export async function Navbar() {
               <Button href="/ilova" size="sm">
                 Boshqaruv panelim
               </Button>
-              <Link href="/chiqish" className="text-sm text-ink-500 hover:text-ink-900">
-                Chiqish
-              </Link>
+              <form action={logOutAction}>
+                <button type="submit" className="text-sm text-ink-500 hover:text-ink-900">
+                  Chiqish
+                </button>
+              </form>
             </>
           ) : (
             <>

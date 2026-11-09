@@ -6,6 +6,7 @@ import { SchoolCard } from "./school-card";
 
 export interface SchoolCardData {
   id: string;
+  slug: string;
   name: string;
   country: string;
   caseStudyCount: number;
@@ -39,6 +40,7 @@ export function SchoolSearchGrid({ schools }: { schools: SchoolCardData[] }) {
           <SchoolCard
             key={s.id}
             schoolId={s.id}
+            slug={s.slug}
             name={s.name}
             caseStudyCount={s.caseStudyCount}
             readCount={s.readCount}

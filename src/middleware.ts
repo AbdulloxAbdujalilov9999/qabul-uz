@@ -5,6 +5,14 @@ import { NextResponse, type NextRequest } from "next/server";
 // Server Component's cookie writes get silently dropped (see server.ts) and
 // sessions would expire client-side even though they're still valid.
 export async function middleware(request: NextRequest) {
+  // Next.js auto-prefetches every visible Link, including nav items the user
+  // never clicks. Letting those invisible requests through here is pure
+  // waste at best, and multiplies calls to Supabase's auth API at worst --
+  // so skip the session check entirely and pass them straight through.
+  if (request.headers.get("next-router-prefetch")) {
+    return NextResponse.next({ request });
+  }
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(

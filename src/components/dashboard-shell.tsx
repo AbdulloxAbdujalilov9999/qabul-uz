@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getRubyBalance, getStreak } from "@/lib/db";
+import { logOutAction } from "@/lib/actions/auth";
 import type { Profile } from "@/lib/types";
 
 const navItems = [
@@ -45,7 +46,9 @@ export async function DashboardShell({ profile, children }: { profile: Profile; 
             <span>💎 Rubin</span>
             <span className="font-semibold text-ink-900">{rubies}</span>
           </div>
-          <Link href="/chiqish" className="mt-2 block text-ink-500 hover:text-ink-900">Chiqish</Link>
+          <form action={logOutAction} className="mt-2">
+            <button type="submit" className="block w-full text-left text-ink-500 hover:text-ink-900">Chiqish</button>
+          </form>
         </div>
       </aside>
 

@@ -3,12 +3,14 @@ import { getSchoolMark } from "./school-badge";
 
 export function SchoolCard({
   schoolId,
+  slug,
   name,
   caseStudyCount,
   readCount,
   people,
 }: {
   schoolId: string;
+  slug: string;
   name: string;
   caseStudyCount: number;
   readCount: number;
@@ -19,7 +21,7 @@ export function SchoolCard({
   const extra = people.length - shown.length;
 
   return (
-    <Link href={`/dasturlar/${schoolId}`} className="group block">
+    <Link href={`/dasturlar/${slug}`} className="group block">
       <div
         className="relative h-44 overflow-hidden rounded-2xl p-5 text-white shadow-sm transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:shadow-lg"
         style={{ backgroundColor: bg }}

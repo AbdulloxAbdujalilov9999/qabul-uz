@@ -11,6 +11,7 @@ export default function SchoolsDirectoryPage() {
     const peopleNames = Array.from(new Set([...relatedCases.map((c) => c.displayName), ...relatedMentors.map((m) => m.displayName)]));
     return {
       id: s.id,
+      slug: s.slug,
       name: s.name,
       country: s.country,
       caseStudyCount: relatedCases.length,
