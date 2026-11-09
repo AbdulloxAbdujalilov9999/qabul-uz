@@ -1,3 +1,4 @@
+import { Check } from "lucide-react";
 import { Container, Button, Badge, Card, Eyebrow, FAQItem } from "@/components/ui";
 
 const compareRows = [
@@ -32,7 +33,7 @@ export default function PricingPage() {
             <p className="mt-1 text-sm text-ink-500">Karta kerak emas</p>
             <ul className="mt-6 space-y-3 text-sm text-ink-700">
               {["Arketip, moslik va grant testlari", "Barcha keyslarni o'qish", "Birinchi 10 ta shaxsiy dars", "Dastur ro'yxati va muddatlar"].map((f) => (
-                <li key={f} className="flex gap-2"><span className="text-brand-600">✓</span>{f}</li>
+                <li key={f} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />{f}</li>
               ))}
             </ul>
             <div className="mt-8">
@@ -53,7 +54,7 @@ export default function PricingPage() {
                 "Tavsiyanoma paketi va brag sheet",
                 "To'liq kunlik reja, diqqat rejimi, Himoya tizimi",
               ].map((f) => (
-                <li key={f} className="flex gap-2"><span className="text-brand-600">✓</span>{f}</li>
+                <li key={f} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />{f}</li>
               ))}
             </ul>
             <div className="mt-8">

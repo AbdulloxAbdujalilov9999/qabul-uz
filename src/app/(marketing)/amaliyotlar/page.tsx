@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Star } from "lucide-react";
 import { Container, Card, Eyebrow } from "@/components/ui";
 import { SchoolBadge } from "@/components/school-badge";
 import { caseStudies, schools } from "@/lib/seed-data";
@@ -41,7 +42,7 @@ export default function CaseStudiesPage() {
                     <div className="mt-4 flex gap-2 text-xs text-ink-500">
                       <span>{c.acceptanceCount} taklif</span>
                       <span>·</span>
-                      <span>★ {c.rating.toFixed(1)}</span>
+                      <span className="inline-flex items-center gap-0.5"><Star className="h-3.5 w-3.5 fill-accent-400 text-accent-500" /> {c.rating.toFixed(1)}</span>
                     </div>
                   </Card>
                 </Link>

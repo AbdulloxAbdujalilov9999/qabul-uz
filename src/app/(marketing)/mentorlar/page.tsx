@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Star, Gem } from "lucide-react";
 import { Container, Card, Eyebrow } from "@/components/ui";
 import { SchoolBadge } from "@/components/school-badge";
 import { mentors, schools } from "@/lib/seed-data";
@@ -40,8 +41,10 @@ export default function MentorsPage() {
                   </div>
                   <p className="mt-3 text-sm text-ink-600">{m.tagline}</p>
                   <div className="mt-4 flex items-center justify-between text-sm">
-                    <span className="text-ink-500">{typeof m.rating === "number" ? `★ ${m.rating.toFixed(1)}` : "Yangi"}</span>
-                    <span className="font-semibold text-accent-700">{m.priceRubies} 💎 / xabar</span>
+                    <span className="inline-flex items-center gap-1 text-ink-500">
+                      {typeof m.rating === "number" ? <><Star className="h-3.5 w-3.5 fill-accent-400 text-accent-500" /> {m.rating.toFixed(1)}</> : "Yangi"}
+                    </span>
+                    <span className="inline-flex items-center gap-1 font-semibold text-accent-700">{m.priceRubies} <Gem className="h-3.5 w-3.5" /> / xabar</span>
                   </div>
                 </Card>
               </Link>

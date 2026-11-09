@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PartyPopper, Check, GraduationCap, CircleDollarSign, PenLine } from "lucide-react";
 import { getSessionUserId } from "@/lib/session";
 import { getLessonProgress, getStreak, getSubscription, getProfile } from "@/lib/db";
 import { lessons } from "@/lib/seed-data";
@@ -47,7 +48,7 @@ export default async function TodayPage() {
         </Card>
       ) : (
         <Card className="mt-6 border-2 border-brand-600 bg-brand-50/40">
-          <p className="font-bold text-ink-950">🎉 Barcha darslarni tugatding!</p>
+          <p className="flex items-center gap-2 font-bold text-ink-950"><PartyPopper className="h-5 w-5 text-accent-500" /> Barcha darslarni tugatding!</p>
           <p className="mt-1 text-sm text-ink-600">Insholaringni va dasturlar ro&apos;yxatini yangilab turishni unutma.</p>
         </Card>
       )}
@@ -75,7 +76,7 @@ export default async function TodayPage() {
                           : "bg-ink-100 text-ink-400"
                       }`}
                     >
-                      {done ? "✓" : l.order}
+                      {done ? <Check className="h-5 w-5" /> : l.order}
                     </Link>
                   );
                 })}
@@ -86,9 +87,9 @@ export default async function TodayPage() {
       </div>
 
       <div className="mt-10 grid gap-4 sm:grid-cols-3">
-        <Link href="/ilova/royxatim"><Card className="hover:shadow-md"><p className="font-semibold text-ink-900">🎓 Dasturlarim</p><p className="mt-1 text-sm text-ink-600">Ro&apos;yxat va muddatlar</p></Card></Link>
-        <Link href="/ilova/grantlar"><Card className="hover:shadow-md"><p className="font-semibold text-ink-900">💰 Grantlarim</p><p className="mt-1 text-sm text-ink-600">Senga mos stipendiyalar</p></Card></Link>
-        <Link href="/ilova/insholarim"><Card className="hover:shadow-md"><p className="font-semibold text-ink-900">✍️ Insholarim</p><p className="mt-1 text-sm text-ink-600">Qoralama va fikr-mulohaza</p></Card></Link>
+        <Link href="/ilova/royxatim"><Card className="hover:shadow-md"><p className="flex items-center gap-2 font-semibold text-ink-900"><GraduationCap className="h-4 w-4 text-brand-600" /> Dasturlarim</p><p className="mt-1 text-sm text-ink-600">Ro&apos;yxat va muddatlar</p></Card></Link>
+        <Link href="/ilova/grantlar"><Card className="hover:shadow-md"><p className="flex items-center gap-2 font-semibold text-ink-900"><CircleDollarSign className="h-4 w-4 text-brand-600" /> Grantlarim</p><p className="mt-1 text-sm text-ink-600">Senga mos stipendiyalar</p></Card></Link>
+        <Link href="/ilova/insholarim"><Card className="hover:shadow-md"><p className="flex items-center gap-2 font-semibold text-ink-900"><PenLine className="h-4 w-4 text-brand-600" /> Insholarim</p><p className="mt-1 text-sm text-ink-600">Qoralama va fikr-mulohaza</p></Card></Link>
       </div>
     </div>
   );

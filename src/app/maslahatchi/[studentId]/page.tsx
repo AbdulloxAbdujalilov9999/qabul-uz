@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Flame } from "lucide-react";
 import { getProfile, getStreak, daysBehind, getLessonProgress, getEssays, getAllFeedbackForEssays, getCollegeList } from "@/lib/db";
 import { lessons, schools } from "@/lib/seed-data";
 import { Card, Badge, Eyebrow } from "@/components/ui";
@@ -34,7 +35,7 @@ export default async function StudentDrawerPage(props: PageProps<"/maslahatchi/[
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
         <Card><p className="text-xs font-semibold uppercase text-ink-500">Darslar</p><p className="mt-1 text-2xl font-extrabold text-ink-950">{progress}/{lessons.length}</p></Card>
-        <Card><p className="text-xs font-semibold uppercase text-ink-500">Streak</p><p className="mt-1 text-2xl font-extrabold text-ink-950">🔥 {streak.current}</p></Card>
+        <Card><p className="text-xs font-semibold uppercase text-ink-500">Streak</p><p className="mt-1 flex items-center gap-1.5 text-2xl font-extrabold text-ink-950"><Flame className="h-5 w-5 text-accent-500" /> {streak.current}</p></Card>
         <Card>
           <p className="text-xs font-semibold uppercase text-ink-500">Ro&apos;yxat muvozanati</p>
           <p className="mt-1 text-sm text-ink-700">R:{counts.reach} T:{counts.target} S:{counts.safety}</p>

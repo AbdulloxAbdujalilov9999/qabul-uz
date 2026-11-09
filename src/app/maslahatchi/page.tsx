@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TriangleAlert } from "lucide-react";
 import { getInstitutionRoster } from "@/lib/db";
 import { institutionDemo, lessons } from "@/lib/seed-data";
 import { Card, Badge, Eyebrow } from "@/components/ui";
@@ -28,8 +29,9 @@ export default async function CounselorRosterPage() {
       </div>
 
       {behindStudents.length > 0 && (
-        <div className="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
-          ⚠ {behindStudents.map((s) => s.profile.fullName).join(", ")} 4+ kundan beri faol emas.
+        <div className="mt-6 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+          <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" />
+          {behindStudents.map((s) => s.profile.fullName).join(", ")} 4+ kundan beri faol emas.
         </div>
       )}
 

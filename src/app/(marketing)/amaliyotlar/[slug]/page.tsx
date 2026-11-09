@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Star } from "lucide-react";
 import { Container, Button, Card } from "@/components/ui";
 import { SchoolBadge } from "@/components/school-badge";
 import { BackButton } from "@/components/back-button";
@@ -24,7 +25,7 @@ export default async function CaseStudyDetailPage(props: PageProps<"/amaliyotlar
         <span className="font-semibold text-ink-700">{school?.name}</span>
       </div>
       <h1 className="mt-4 text-3xl font-extrabold text-ink-950">{study.title}</h1>
-      <p className="mt-2 text-sm text-ink-500">{study.displayName} · {study.acceptanceCount} ta taklif oldi · ★ {study.rating.toFixed(1)}</p>
+      <p className="mt-2 flex items-center gap-1 text-sm text-ink-500">{study.displayName} · {study.acceptanceCount} ta taklif oldi · <Star className="h-3.5 w-3.5 fill-accent-400 text-accent-500" /> {study.rating.toFixed(1)}</p>
 
       <div className="mt-4 flex flex-wrap gap-1.5">
         {study.tags.map((t) => (

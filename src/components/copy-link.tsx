@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Check } from "lucide-react";
 
 export function CopyLink({ path }: { path: string }) {
   const [copied, setCopied] = useState(false);
@@ -19,9 +20,9 @@ export function CopyLink({ path }: { path: string }) {
             // clipboard unavailable, user can select-copy manually
           }
         }}
-        className="shrink-0 rounded-md bg-brand-700 px-2.5 py-1 text-xs font-medium text-white hover:bg-brand-800"
+        className="flex shrink-0 items-center gap-1 rounded-md bg-brand-700 px-2.5 py-1 text-xs font-medium text-white hover:bg-brand-800"
       >
-        {copied ? "Nusxalandi ✓" : "Nusxalash"}
+        {copied ? <>Nusxalandi <Check className="h-3 w-3" /></> : "Nusxalash"}
       </button>
     </div>
   );

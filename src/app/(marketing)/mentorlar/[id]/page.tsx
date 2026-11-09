@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { Gem } from "lucide-react";
 import { Container, Card, Eyebrow } from "@/components/ui";
 import { MessageMentorForm } from "@/components/message-mentor-form";
 import { SchoolBadge } from "@/components/school-badge";
@@ -57,7 +58,7 @@ export default async function MentorDetailPage(props: PageProps<"/mentorlar/[id]
         <div>
           <Card>
             <Eyebrow>Xabar yozish</Eyebrow>
-            <p className="mt-2 text-xs text-ink-500">Narx: {mentor.priceRubies} 💎 / xabar · javob bermasa qaytariladi</p>
+            <p className="mt-2 flex items-center gap-1 text-xs text-ink-500">Narx: {mentor.priceRubies} <Gem className="h-3 w-3" /> / xabar · javob bermasa qaytariladi</p>
             <div className="mt-4">
               <MessageMentorForm mentorId={mentor.id} priceRubies={mentor.priceRubies} />
             </div>

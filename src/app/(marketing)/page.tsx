@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Check, Flame, Star, Gem } from "lucide-react";
 import { Container, Button, Badge, Card, Eyebrow, FAQItem } from "@/components/ui";
 import { Mascot } from "@/components/mascot";
 import { SchoolBadge } from "@/components/school-badge";
@@ -53,13 +54,13 @@ export default function HomePage() {
               <ul className="mt-4 space-y-3">
                 {["Arketip testini yakunlash", "Ro'yxatga 2 dastur qo'shish", "Kundalikka yozish"].map((t) => (
                   <li key={t} className="flex items-center gap-3 rounded-xl bg-brand-50 px-4 py-3 text-sm font-medium text-ink-900">
-                    <span className="grid h-5 w-5 place-items-center rounded-full bg-brand-600 text-xs text-white">✓</span>
+                    <span className="grid h-5 w-5 place-items-center rounded-full bg-brand-600 text-white"><Check className="h-3 w-3" /></span>
                     {t}
                   </li>
                 ))}
               </ul>
               <div className="mt-5 flex items-center justify-between rounded-xl bg-accent-50 px-4 py-3 text-sm">
-                <span className="font-medium text-accent-800">🔥 7 kunlik streak</span>
+                <span className="flex items-center gap-1.5 font-medium text-accent-800"><Flame className="h-4 w-4" /> 7 kunlik streak</span>
                 <span className="text-accent-700">Diqqat rejimi yoqilgan</span>
               </div>
             </div>
@@ -190,7 +191,7 @@ export default function HomePage() {
                     <div className="mt-4 flex gap-2 text-xs text-ink-500">
                       <span>{c.acceptanceCount} taklif</span>
                       <span>·</span>
-                      <span>★ {c.rating.toFixed(1)}</span>
+                      <span className="inline-flex items-center gap-0.5"><Star className="h-3.5 w-3.5 fill-accent-400 text-accent-500" /> {c.rating.toFixed(1)}</span>
                     </div>
                   </Card>
                 </Link>
@@ -227,7 +228,7 @@ export default function HomePage() {
                     <p className="mt-3 font-semibold text-ink-900">{m.displayName}</p>
                     <p className="text-xs text-ink-500">{school?.name} · {m.classYear}</p>
                     <p className="mt-2 text-xs text-ink-600">{m.tagline}</p>
-                    <Badge tone="accent">{m.priceRubies} 💎</Badge>
+                    <Badge tone="accent"><span className="inline-flex items-center gap-1">{m.priceRubies} <Gem className="h-3 w-3" /></span></Badge>
                   </Card>
                 </Link>
               );
@@ -308,7 +309,7 @@ function FeatureRow({
             <ul className="mt-4 space-y-2 text-sm text-ink-700">
               {bullets.map((b) => (
                 <li key={b} className="flex gap-2">
-                  <span className="text-brand-600">✓</span>
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
                   {b}
                 </li>
               ))}

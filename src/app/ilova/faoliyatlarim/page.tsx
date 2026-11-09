@@ -1,3 +1,4 @@
+import { Lightbulb } from "lucide-react";
 import { getSessionUserId } from "@/lib/session";
 import { getExtracurriculars } from "@/lib/db";
 import { Card, Badge, Button, Eyebrow } from "@/components/ui";
@@ -23,7 +24,11 @@ export default async function ExtracurricularsPage() {
               {e.aiRating && <Badge tone="brand">{e.aiRating}/10</Badge>}
             </div>
             <p className="mt-2 text-sm text-ink-700">{e.description}</p>
-            {e.aiFeedback && <p className="mt-2 rounded-lg bg-accent-50 px-3 py-2 text-xs text-accent-800">💡 {e.aiFeedback}</p>}
+            {e.aiFeedback && (
+              <p className="mt-2 flex items-start gap-1.5 rounded-lg bg-accent-50 px-3 py-2 text-xs text-accent-800">
+                <Lightbulb className="mt-0.5 h-3.5 w-3.5 shrink-0" /> {e.aiFeedback}
+              </p>
+            )}
             <form action={removeExtracurricular.bind(null, e.id)} className="mt-3">
               <button className="text-xs font-medium text-ink-400 hover:text-red-600">olib tashlash</button>
             </form>

@@ -1,3 +1,4 @@
+import { TriangleAlert } from "lucide-react";
 import { getSessionUserId } from "@/lib/session";
 import { getCollegeList } from "@/lib/db";
 import { schools } from "@/lib/seed-data";
@@ -33,7 +34,7 @@ export default async function CollegeListPage() {
         <span className="rounded-full bg-brand-100 px-3 py-1 text-brand-800">Target: {counts.target}</span>
         <span className="rounded-full bg-ink-100 px-3 py-1 text-ink-700">Safety: {counts.safety}</span>
         {counts.reach > 0 && counts.safety === 0 && (
-          <span className="rounded-full bg-red-100 px-3 py-1 text-red-700">⚠ Safety dastur yo&apos;q</span>
+          <span className="flex items-center gap-1 rounded-full bg-red-100 px-3 py-1 text-red-700"><TriangleAlert className="h-3.5 w-3.5" /> Safety dastur yo&apos;q</span>
         )}
       </div>
 

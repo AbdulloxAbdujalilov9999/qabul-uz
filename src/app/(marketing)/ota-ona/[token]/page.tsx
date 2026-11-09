@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { CircleCheck } from "lucide-react";
 import { getParentLinkByToken, getProfile } from "@/lib/db";
 import { Container, Card, Badge } from "@/components/ui";
 import { simulateParentPayment } from "@/lib/actions/billing";
@@ -23,7 +24,7 @@ export default async function ParentPayPage(props: PageProps<"/ota-ona/[token]">
 
       <Card className="mt-8">
         {link.status === "paid" ? (
-          <p className="font-semibold text-brand-700">✓ To&apos;lov qabul qilindi. Hisob faollashtirildi.</p>
+          <p className="flex items-center justify-center gap-1.5 font-semibold text-brand-700"><CircleCheck className="h-5 w-5" /> To&apos;lov qabul qilindi. Hisob faollashtirildi.</p>
         ) : (
           <>
             <p className="text-3xl font-extrabold text-ink-950">1,500,000 so&apos;m</p>

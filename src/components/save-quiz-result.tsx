@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { saveQuizResult } from "@/lib/actions/quiz";
 import type { QuizSlug } from "@/lib/types";
 import { Button } from "./ui";
@@ -18,7 +19,7 @@ export function SaveQuizResult({ quizSlug, answers, result }: { quizSlug: QuizSl
   }
 
   if (status === "saved") {
-    return <p className="text-sm font-medium text-brand-700">✓ Natija profilingga saqlandi.</p>;
+    return <p className="flex items-center gap-1.5 text-sm font-medium text-brand-700"><Check className="h-4 w-4" /> Natija profilingga saqlandi.</p>;
   }
   if (status === "need_login") {
     return (

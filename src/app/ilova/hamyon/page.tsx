@@ -1,3 +1,4 @@
+import { Gem } from "lucide-react";
 import { getSessionUserId } from "@/lib/session";
 import { getRubyBalance, getSubscription, getParentLink } from "@/lib/db";
 import { Card, Badge, Button, Eyebrow } from "@/components/ui";
@@ -27,12 +28,12 @@ export default async function WalletPage() {
 
       <Card>
         <p className="text-xs font-semibold uppercase text-ink-500">Joriy balans</p>
-        <p className="mt-1 text-4xl font-extrabold text-accent-700">{balance} 💎</p>
+        <p className="mt-1 flex items-center gap-1.5 text-4xl font-extrabold text-accent-700">{balance} <Gem className="h-7 w-7" /></p>
         <div className="mt-5 grid grid-cols-3 gap-3">
           {topUps.map((t) => (
             <form key={t.amount} action={demoTopUpRubies.bind(null, t.amount)}>
               <button className="w-full rounded-xl border border-ink-900/10 px-3 py-3 text-center hover:border-brand-500">
-                <p className="font-bold text-ink-950">+{t.amount} 💎</p>
+                <p className="flex items-center justify-center gap-1 font-bold text-ink-950">+{t.amount} <Gem className="h-4 w-4" /></p>
                 <p className="text-xs text-ink-500">{t.price}</p>
               </button>
             </form>

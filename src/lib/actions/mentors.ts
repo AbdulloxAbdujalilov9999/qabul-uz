@@ -20,7 +20,7 @@ export async function startConversation(mentorId: string, _prev: MessageState, f
   if (!body) return { error: "Xabar bo'sh bo'lishi mumkin emas." };
 
   if ((await getRubyBalance(userId)) < mentor.priceRubies) {
-    return { error: `Yetarli rubin yo'q - kerak: ${mentor.priceRubies} 💎. Hamyoningizni to'ldiring.` };
+    return { error: `Yetarli rubin yo'q - kerak: ${mentor.priceRubies} rubin. Hamyoningizni to'ldiring.` };
   }
 
   const conversation = await findOrCreateConversation(userId, mentorId);

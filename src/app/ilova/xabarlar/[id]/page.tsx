@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Gem } from "lucide-react";
 import { getSessionUserId } from "@/lib/session";
 import { getConversation, getMessages } from "@/lib/db";
 import { mentors, schools } from "@/lib/seed-data";
@@ -31,7 +32,7 @@ export default async function ConversationPage(props: PageProps<"/ilova/xabarlar
         {messages.map((m) => (
           <div key={m.id} className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm ${m.senderKind === "student" ? "ml-auto bg-brand-700 text-white" : "bg-ink-100 text-ink-900"}`}>
             {m.body}
-            {m.rubiesCharged > 0 && <p className="mt-1 text-xs opacity-70">−{m.rubiesCharged} 💎</p>}
+            {m.rubiesCharged > 0 && <p className="mt-1 flex items-center gap-1 text-xs opacity-70">−{m.rubiesCharged} <Gem className="h-3 w-3" /></p>}
           </div>
         ))}
       </div>

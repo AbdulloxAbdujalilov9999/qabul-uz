@@ -1,18 +1,19 @@
 import Link from "next/link";
+import { Map, GraduationCap, PenLine, Star, NotebookText, CircleDollarSign, MessageCircle, Gem, Settings, Flame } from "lucide-react";
 import { getRubyBalance, getStreak } from "@/lib/db";
 import { logOutAction } from "@/lib/actions/auth";
 import type { Profile } from "@/lib/types";
 
 const navItems = [
-  { href: "/ilova", label: "Bugungi reja", icon: "🗺️" },
-  { href: "/ilova/royxatim", label: "Dasturlarim", icon: "🎓" },
-  { href: "/ilova/insholarim", label: "Insholarim", icon: "✍️" },
-  { href: "/ilova/faoliyatlarim", label: "Faoliyatlarim", icon: "⭐" },
-  { href: "/ilova/kundalik", label: "Kundalik", icon: "📓" },
-  { href: "/ilova/grantlar", label: "Grantlarim", icon: "💰" },
-  { href: "/ilova/xabarlar", label: "Xabarlar", icon: "💬" },
-  { href: "/ilova/hamyon", label: "Hamyon", icon: "💎" },
-  { href: "/ilova/sozlamalar", label: "Sozlamalar", icon: "⚙️" },
+  { href: "/ilova", label: "Bugungi reja", icon: Map },
+  { href: "/ilova/royxatim", label: "Dasturlarim", icon: GraduationCap },
+  { href: "/ilova/insholarim", label: "Insholarim", icon: PenLine },
+  { href: "/ilova/faoliyatlarim", label: "Faoliyatlarim", icon: Star },
+  { href: "/ilova/kundalik", label: "Kundalik", icon: NotebookText },
+  { href: "/ilova/grantlar", label: "Grantlarim", icon: CircleDollarSign },
+  { href: "/ilova/xabarlar", label: "Xabarlar", icon: MessageCircle },
+  { href: "/ilova/hamyon", label: "Hamyon", icon: Gem },
+  { href: "/ilova/sozlamalar", label: "Sozlamalar", icon: Settings },
 ];
 
 export async function DashboardShell({ profile, children }: { profile: Profile; children: React.ReactNode }) {
@@ -32,18 +33,18 @@ export async function DashboardShell({ profile, children }: { profile: Profile; 
               href={item.href}
               className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-ink-700 hover:bg-brand-50 hover:text-brand-800"
             >
-              <span>{item.icon}</span>
+              <item.icon className="h-4 w-4" />
               {item.label}
             </Link>
           ))}
         </nav>
         <div className="space-y-2 border-t border-ink-900/8 pt-4 text-xs text-ink-500">
           <div className="flex items-center justify-between">
-            <span>🔥 Streak</span>
+            <span className="flex items-center gap-1.5"><Flame className="h-3.5 w-3.5 text-accent-500" /> Streak</span>
             <span className="font-semibold text-ink-900">{streak.current} kun</span>
           </div>
           <div className="flex items-center justify-between">
-            <span>💎 Rubin</span>
+            <span className="flex items-center gap-1.5"><Gem className="h-3.5 w-3.5 text-brand-600" /> Rubin</span>
             <span className="font-semibold text-ink-900">{rubies}</span>
           </div>
           <form action={logOutAction} className="mt-2">
@@ -56,14 +57,14 @@ export async function DashboardShell({ profile, children }: { profile: Profile; 
         <header className="flex items-center justify-between border-b border-ink-900/8 bg-white px-5 py-3 lg:hidden">
           <Link href="/" className="font-extrabold text-ink-950">Qabul</Link>
           <div className="flex items-center gap-3 text-xs text-ink-600">
-            <span>🔥 {streak.current}</span>
-            <span>💎 {rubies}</span>
+            <span className="flex items-center gap-1"><Flame className="h-3.5 w-3.5 text-accent-500" /> {streak.current}</span>
+            <span className="flex items-center gap-1"><Gem className="h-3.5 w-3.5 text-brand-600" /> {rubies}</span>
           </div>
         </header>
         <nav className="flex gap-1 overflow-x-auto border-b border-ink-900/8 bg-white px-3 py-2 text-xs lg:hidden">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="shrink-0 rounded-full px-3 py-1.5 font-medium text-ink-600 hover:bg-brand-50">
-              {item.icon} {item.label}
+            <Link key={item.href} href={item.href} className="flex shrink-0 items-center gap-1 rounded-full px-3 py-1.5 font-medium text-ink-600 hover:bg-brand-50">
+              <item.icon className="h-3.5 w-3.5" /> {item.label}
             </Link>
           ))}
         </nav>
