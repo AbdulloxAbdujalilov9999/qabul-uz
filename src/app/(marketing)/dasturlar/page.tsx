@@ -1,13 +1,24 @@
-import Link from "next/link";
-import { Container, Card, Badge, Eyebrow } from "@/components/ui";
-import { SchoolBadge } from "@/components/school-badge";
-import { schools, caseStudies } from "@/lib/seed-data";
+import { Container, Eyebrow } from "@/components/ui";
+import { SchoolSearchGrid, type SchoolCardData } from "@/components/school-search-grid";
+import { schools, caseStudies, mentors } from "@/lib/seed-data";
 
 export const metadata = { title: "Dasturlar" };
 
-const kindLabel = { university: "Universitet", scholarship_program: "Grant dasturi", exchange_program: "Almashinuv" } as const;
-
 export default function SchoolsDirectoryPage() {
+  const cards: SchoolCardData[] = schools.map((s) => {
+    const relatedCases = caseStudies.filter((c) => c.schoolId === s.id);
+    const relatedMentors = mentors.filter((m) => m.schoolId === s.id);
+    const peopleNames = Array.from(new Set([...relatedCases.map((c) => c.displayName), ...relatedMentors.map((m) => m.displayName)]));
+    return {
+      id: s.id,
+      name: s.name,
+      country: s.country,
+      caseStudyCount: relatedCases.length,
+      readCount: relatedCases.reduce((sum, c) => sum + c.readCount, 0),
+      people: peopleNames,
+    };
+  });
+
   return (
     <div>
       <section className="bg-gradient-to-b from-brand-50 to-paper py-16">
@@ -18,25 +29,8 @@ export default function SchoolsDirectoryPage() {
         </Container>
       </section>
       <section className="py-16">
-        <Container className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {schools.map((s) => {
-            const count = caseStudies.filter((c) => c.schoolId === s.id).length;
-            return (
-              <Link key={s.id} href={`/dasturlar/${s.slug}`}>
-                <Card className="h-full transition-shadow hover:shadow-md">
-                  <div className="flex items-center justify-between">
-                    <SchoolBadge schoolId={s.id} size="md" />
-                    <Badge tone="ink">{kindLabel[s.kind]}</Badge>
-                  </div>
-                  <p className="mt-3 font-bold text-ink-950">{s.name}</p>
-                  <p className="text-sm text-ink-500">{s.country}{s.city ? ` · ${s.city}` : ""}</p>
-                  <p className="mt-3 text-xs font-semibold text-ink-500">
-                    {count > 0 ? `${count} ta keys` : "Tez orada keyslar"}
-                  </p>
-                </Card>
-              </Link>
-            );
-          })}
+        <Container>
+          <SchoolSearchGrid schools={cards} />
         </Container>
       </section>
     </div>

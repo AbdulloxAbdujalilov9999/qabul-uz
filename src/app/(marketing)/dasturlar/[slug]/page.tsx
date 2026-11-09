@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Container, Badge, Card, Eyebrow } from "@/components/ui";
-import { SchoolBadge } from "@/components/school-badge";
+import { Container, Card, Eyebrow } from "@/components/ui";
+import { getSchoolMark } from "@/components/school-badge";
 import { schools, caseStudies, mentors } from "@/lib/seed-data";
 
 export function generateStaticParams() {
@@ -17,22 +17,33 @@ export default async function SchoolDetailPage(props: PageProps<"/dasturlar/[slu
 
   const relatedCases = caseStudies.filter((c) => c.schoolId === school.id);
   const relatedMentors = mentors.filter((m) => m.schoolId === school.id);
+  const { abbr, bg } = getSchoolMark(school.id);
 
   return (
-    <Container className="max-w-3xl py-16">
-      <div className="flex items-center gap-3">
-        <SchoolBadge schoolId={school.id} size="lg" />
-        <Badge tone="ink">{school.country}</Badge>
-      </div>
-      <h1 className="mt-3 text-3xl font-extrabold text-ink-950">{school.name}</h1>
-      <p className="mt-2 text-ink-700">{school.description}</p>
-      <div className="mt-4 flex flex-wrap gap-1.5">
-        {school.tags.map((t) => (
-          <span key={t} className="rounded-full bg-ink-50 px-2.5 py-1 text-xs text-ink-600">{t}</span>
-        ))}
+    <div>
+      <div className="relative overflow-hidden py-16 text-white" style={{ backgroundColor: bg }}>
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -right-6 -top-10 select-none text-[12rem] font-black italic leading-none tracking-tighter text-white/10"
+        >
+          {abbr}
+        </span>
+        <Container className="relative max-w-3xl">
+          <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-bold uppercase tracking-wide backdrop-blur-sm">
+            {school.country}{school.city ? ` · ${school.city}` : ""}
+          </span>
+          <h1 className="mt-4 text-3xl font-extrabold sm:text-4xl">{school.name}</h1>
+          <p className="mt-3 max-w-xl text-white/85">{school.description}</p>
+          <div className="mt-4 flex flex-wrap gap-1.5">
+            {school.tags.map((t) => (
+              <span key={t} className="rounded-full bg-white/15 px-2.5 py-1 text-xs backdrop-blur-sm">{t}</span>
+            ))}
+          </div>
+        </Container>
       </div>
 
-      <section className="mt-10">
+      <Container className="max-w-3xl py-10">
+      <section>
         <Eyebrow>MUDDATLAR</Eyebrow>
         <div className="mt-4 space-y-2">
           {school.deadlines.map((d) => (
@@ -73,6 +84,7 @@ export default async function SchoolDetailPage(props: PageProps<"/dasturlar/[slu
           </div>
         </section>
       )}
-    </Container>
+      </Container>
+    </div>
   );
 }
