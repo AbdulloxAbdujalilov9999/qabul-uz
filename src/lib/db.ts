@@ -126,6 +126,24 @@ export async function completeLesson(userId: string, lessonId: string) {
   await touchStreak(userId);
 }
 
+export async function getLessonResponse(userId: string, lessonId: string): Promise<string> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("lesson_responses")
+    .select("content")
+    .eq("user_id", userId)
+    .eq("lesson_id", lessonId)
+    .maybeSingle();
+  return (data?.content as string) ?? "";
+}
+
+export async function saveLessonResponseDb(userId: string, lessonId: string, content: string) {
+  const supabase = await createClient();
+  await supabase
+    .from("lesson_responses")
+    .upsert({ user_id: userId, lesson_id: lessonId, content, updated_at: nowIso() }, { onConflict: "user_id,lesson_id" });
+}
+
 // ---- College list ----
 
 function toCollegeListEntry(row: Record<string, unknown>): CollegeListEntry {

@@ -116,6 +116,11 @@ export interface Lesson {
   summary: string;
   body: string;
   isFree: boolean;
+  // Where the lesson's actual task happens: a CTA to the relevant feature
+  // (quiz, essay editor, college list, ...), or an inline reflection prompt
+  // answered right on the lesson page. A lesson has at most one of these.
+  action?: { label: string; href: string };
+  reflectionPrompt?: string;
 }
 
 export type LessonStatus = "locked" | "available" | "in_progress" | "completed";
@@ -125,6 +130,13 @@ export interface LessonProgress {
   lessonId: string;
   status: LessonStatus;
   completedAt?: string;
+}
+
+export interface LessonResponse {
+  userId: string;
+  lessonId: string;
+  content: string;
+  updatedAt: string;
 }
 
 export interface Streak {

@@ -1,10 +1,12 @@
 import { notFound, redirect } from "next/navigation";
+import { CircleCheck } from "lucide-react";
 import { getSessionUserId } from "@/lib/session";
-import { getLessonProgress, getSubscription } from "@/lib/db";
+import { getLessonProgress, getSubscription, getLessonResponse } from "@/lib/db";
 import { lessons } from "@/lib/seed-data";
 import { Container, Badge, Button } from "@/components/ui";
 import { CompleteLessonButton } from "@/components/complete-lesson-button";
 import { BackButton } from "@/components/back-button";
+import { LessonResponseEditor } from "@/components/lesson-response-editor";
 
 export default async function LessonPage(props: PageProps<"/ilova/darslar/[slug]">) {
   const { slug } = await props.params;
@@ -17,6 +19,7 @@ export default async function LessonPage(props: PageProps<"/ilova/darslar/[slug]
 
   const progress = await getLessonProgress(userId);
   const done = progress.some((p) => p.lessonId === lesson.id && p.status === "completed");
+  const response = lesson.reflectionPrompt ? await getLessonResponse(userId, lesson.id) : "";
 
   const categoryLabel: Record<string, string> = {
     discovery: "Kashfiyot", list_building: "Ro'yxat", activities: "Faoliyatlar",
@@ -32,9 +35,22 @@ export default async function LessonPage(props: PageProps<"/ilova/darslar/[slug]
       <div className="mt-6 rounded-2xl border border-ink-900/8 bg-white p-6 leading-relaxed text-ink-800">
         {lesson.body}
       </div>
+
+      {lesson.reflectionPrompt && (
+        <LessonResponseEditor lessonId={lesson.id} prompt={lesson.reflectionPrompt} initialContent={response} />
+      )}
+
+      {lesson.action && (
+        <div className="mt-6">
+          <Button href={lesson.action.href}>{lesson.action.label} →</Button>
+        </div>
+      )}
+
       <div className="mt-8 flex items-center gap-3">
         {done ? (
-          <p className="font-medium text-brand-700">✓ Tugallangan</p>
+          <p className="flex items-center gap-1.5 font-medium text-brand-700">
+            <CircleCheck className="h-5 w-5" /> Tugallangan
+          </p>
         ) : (
           <CompleteLessonButton lessonId={lesson.id} />
         )}

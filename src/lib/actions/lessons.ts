@@ -2,13 +2,19 @@
 
 import { revalidatePath } from "next/cache";
 import { getSessionUserId } from "@/lib/session";
-import { completeLesson, getStreak, setFocusMode, addSafetyNestContactDb } from "@/lib/db";
+import { completeLesson, getStreak, setFocusMode, addSafetyNestContactDb, saveLessonResponseDb } from "@/lib/db";
 
 export async function completeLessonAction(lessonId: string) {
   const userId = await getSessionUserId();
   if (!userId) return;
   await completeLesson(userId, lessonId);
   revalidatePath("/ilova");
+}
+
+export async function saveLessonResponse(lessonId: string, content: string) {
+  const userId = await getSessionUserId();
+  if (!userId) return;
+  await saveLessonResponseDb(userId, lessonId, content);
 }
 
 export async function toggleFocusMode() {

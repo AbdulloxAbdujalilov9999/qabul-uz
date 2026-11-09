@@ -144,6 +144,15 @@ create table streaks (
   focus_mode_enabled boolean not null default true -- doomscroll blocker toggle (web: site-blocklist nudge)
 );
 
+create table lesson_responses (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references profiles(id) on delete cascade,
+  lesson_id text not null,
+  content text not null default '',
+  updated_at timestamptz not null default now(),
+  unique (user_id, lesson_id)
+);
+
 create table safety_nest_contacts (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references profiles(id) on delete cascade,
@@ -412,6 +421,7 @@ create table meetings (
 
 create index on college_list_entries (user_id);
 create index on lesson_progress (user_id);
+create index on lesson_responses (user_id);
 create index on essays (user_id);
 create index on extracurriculars (user_id);
 create index on scholarship_matches (user_id);
@@ -537,6 +547,9 @@ create policy "safety_nest_own" on safety_nest_contacts for all to authenticated
 
 alter table journal_entries enable row level security;
 create policy "journal_entries_own" on journal_entries for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+alter table lesson_responses enable row level security;
+create policy "lesson_responses_own" on lesson_responses for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
 
 alter table essay_topic_suggestions enable row level security;
 create policy "essay_topic_suggestions_own" on essay_topic_suggestions for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
