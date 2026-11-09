@@ -3,7 +3,14 @@ import { Container, Button, Badge, Card, Eyebrow, FAQItem } from "@/components/u
 import { Mascot } from "@/components/mascot";
 import { SchoolBadge } from "@/components/school-badge";
 import { FeatureGrid } from "@/components/feature-grid";
+import {
+  ScholarshipMatchIllustration,
+  ActivitiesListIllustration,
+  EssayCoachIllustration,
+  DailyPlanIllustration,
+} from "@/components/feature-illustrations";
 import { caseStudies, mentors, schools } from "@/lib/seed-data";
+import type { ReactNode } from "react";
 
 export default function HomePage() {
   const previewCases = caseStudies.slice(0, 3);
@@ -109,6 +116,7 @@ export default function HomePage() {
         body="Qisqa test - profilingdan to'ldirilgan - seni milliy stipendiyalar, ehtiyojga asoslangan to'liq grantlar, qiziqishlaringga mos tanlovlar va mintaqaviy dasturlarga moslaydi. Muddati yaqinlashganlari yuqorida turadi."
         cta={{ href: "/testlar/grant", label: "Grantimni toping" }}
         bullets={["Moliya va shaxsiy savollar faqat brauzeringda baholanadi, saqlanmaydi.", "Har bir grant muddati bilan tartiblangan."]}
+        illustration={<ScholarshipMatchIllustration />}
       />
 
       <FeatureRow
@@ -117,6 +125,7 @@ export default function HomePage() {
         title="Qilgan ishlaringni kuchli ro'yxatga aylantir."
         body="Faoliyatlar ro'yxatini tuz va baholat, har bir yozuvni qanday kuchaytirishni bil. Senga mos imkoniyatlarni - tadqiqot, amaliyot, jamoat ishlari - top va tavsiyanoma uchun o'qituvchilarga tayyor paket yubor."
         cta={{ href: "/royxatdan-otish", label: "Bepul boshlash" }}
+        illustration={<ActivitiesListIllustration />}
       />
 
       <FeatureRow
@@ -124,6 +133,7 @@ export default function HomePage() {
         title="Insholaring bo'yicha ma'noli fikr ol."
         body="Har bir qoralama grammatika, mantiq, hikoya kuchi va tasvir bo'yicha baholanadi - qaysi joy kuchli, qaysi joyni kuchaytirish kerak, qator-qator sharhlar bilan. Hech qachon qayta yozib bermaydi - bu sening so'zlaring bo'lib qoladi."
         cta={{ href: "/amaliyotlar", label: "Haqiqiy keyslarni o'qing" }}
+        illustration={<EssayCoachIllustration />}
       />
 
       <FeatureRow
@@ -132,6 +142,7 @@ export default function HomePage() {
         title="Butun ariza jarayoni - o'yinga aylangan."
         body="Har bir muddat avtomatik tortib olinadi, har bir kun kichik darsga bo'linadi - dastur tanlashdan topshirishgacha. Diqqat rejimi yoqilganda ijtimoiy tarmoqlar darsni tugatmaguningcha eslatma bilan to'xtatib turadi."
         bullets={["Illyustratsiyali xarita bo'ylab yurish", "Diqqat rejimi (Focus Mode) orqali chalg'ituvchi ilovalarni eslatma bilan to'xtatish", "Yaqinlaringga avtomatik signal (Himoya tizimi)"]}
+        illustration={<DailyPlanIllustration />}
       />
 
       <FeatureGrid />
@@ -280,6 +291,7 @@ function FeatureRow({
   cta,
   bullets,
   reverse,
+  illustration,
 }: {
   eyebrow: string;
   title: string;
@@ -287,11 +299,12 @@ function FeatureRow({
   cta?: { href: string; label: string };
   bullets?: string[];
   reverse?: boolean;
+  illustration: ReactNode;
 }) {
   return (
     <section className="py-16">
       <Container className={`grid items-center gap-10 lg:grid-cols-2 ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}>
-        <div className="aspect-[4/3] rounded-3xl bg-gradient-to-br from-brand-100 to-accent-100" />
+        {illustration}
         <div>
           <Eyebrow>{eyebrow}</Eyebrow>
           <h3 className="mt-3 text-2xl font-extrabold text-ink-950 sm:text-3xl">{title}</h3>
