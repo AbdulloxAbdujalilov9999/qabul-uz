@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container, Button, Badge, Card, Eyebrow, FAQItem } from "@/components/ui";
 import { Mascot } from "@/components/mascot";
 import { SchoolBadge } from "@/components/school-badge";
+import { LogoMarquee } from "@/components/logo-marquee";
 import { FeatureGrid } from "@/components/feature-grid";
 import {
   ScholarshipMatchIllustration,
@@ -20,14 +21,8 @@ export default function HomePage() {
   return (
     <div>
       {/* Logo strip */}
-      <section className="overflow-hidden border-b border-ink-900/8 bg-white py-5">
-        <Container>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {logoStrip.map((s) => (
-              <SchoolBadge key={s.id} schoolId={s.id} size="sm" />
-            ))}
-          </div>
-        </Container>
+      <section className="overflow-hidden border-b border-ink-900/8 bg-white py-6">
+        <LogoMarquee schoolIds={logoStrip.map((s) => s.id)} />
       </section>
 
       {/* Hero */}

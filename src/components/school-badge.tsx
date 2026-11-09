@@ -30,6 +30,26 @@ const palette: Record<string, { abbr: string; bg: string }> = {
 
 const fallbackColors = ["#0F6E68", "#1D4ED8", "#B91C1C", "#7C2D92", "#047857", "#B45309", "#0E7490", "#BE123C"];
 
+// Official logos, sourced from each institution's own press/brand assets or
+// Wikimedia Commons, used only to identify that institution's own program on
+// its own page/card (never implying sponsorship or a partnership with us).
+// Where no reliably-sourced logo was available, SchoolBadge falls back to the
+// colored monogram above instead of guessing.
+export const realLogos: Record<string, string> = {
+  sch_fulbright: "/logos/sch_fulbright.svg",
+  sch_daad: "/logos/sch_daad.svg",
+  sch_mit: "/logos/sch_mit.svg",
+  sch_oxford: "/logos/sch_oxford.png",
+  sch_ethz: "/logos/sch_ethz.svg",
+  sch_snu: "/logos/sch_snu.svg",
+  sch_inha: "/logos/sch_inha.png",
+  sch_kaist: "/logos/sch_kaist.svg",
+  sch_tum: "/logos/sch_tum.svg",
+  sch_epfl: "/logos/sch_epfl.svg",
+  sch_tsue: "/logos/sch_tsue.png",
+  sch_newuz: "/logos/sch_newuz.jpg",
+};
+
 export function getSchoolMark(schoolId: string): { abbr: string; bg: string } {
   if (palette[schoolId]) return palette[schoolId];
   const letters = schoolId.replace("sch_", "").slice(0, 3).toUpperCase();
@@ -45,7 +65,25 @@ const sizeClasses = {
   lg: "h-16 w-16 text-sm rounded-xl",
 };
 
+const logoPadding = {
+  xs: "p-1",
+  sm: "p-1.5",
+  md: "p-2",
+  lg: "p-2.5",
+};
+
 export function SchoolBadge({ schoolId, size = "md" }: { schoolId: string; size?: keyof typeof sizeClasses }) {
+  const logo = realLogos[schoolId];
+  if (logo) {
+    return (
+      <div
+        className={`grid shrink-0 place-items-center border border-ink-900/8 bg-white shadow-sm ${sizeClasses[size]} ${logoPadding[size]}`}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={logo} alt={schoolId} className="h-full w-full object-contain" />
+      </div>
+    );
+  }
   const { abbr, bg } = getSchoolMark(schoolId);
   return (
     <div
