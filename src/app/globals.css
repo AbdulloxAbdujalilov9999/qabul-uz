@@ -4,29 +4,30 @@
   --background: #fbf8f1;
   --foreground: #11212e;
 
-  /* Brand: "Samarkand teal" + "Registan gold" -- swap freely later */
-  --color-brand-50: #eef7f6;
-  --color-brand-100: #d6ece9;
-  --color-brand-200: #aed9d4;
-  --color-brand-300: #7ec2bb;
-  --color-brand-400: #4aa59c;
-  --color-brand-500: #248a81;
-  --color-brand-600: #0f6e68;
-  --color-brand-700: #0c5753;
-  --color-brand-800: #0a4542;
-  --color-brand-900: #083836;
-  --color-brand-950: #042120;
+  /* Brand: UniSprint -- Electric Blue fading to Primary Navy, plus Orange-Coral */
+  --color-brand-50: #e4f2ff;
+  --color-brand-100: #b9dcff;
+  --color-brand-200: #96cbff;
+  --color-brand-300: #76bbff;
+  --color-brand-400: #58acff;
+  --color-brand-500: #3a9eff;
+  --color-brand-600: #1e90ff;
+  --color-brand-700: #186cc1;
+  --color-brand-800: #134c8c;
+  --color-brand-900: #0f2e59;
+  --color-brand-950: #0a1128;
 
-  --color-accent-50: #fdf6e8;
-  --color-accent-100: #faebc4;
-  --color-accent-200: #f4d788;
-  --color-accent-300: #edc157;
-  --color-accent-400: #e4a62b;
-  --color-accent-500: #cc8c17;
-  --color-accent-600: #a66e10;
-  --color-accent-700: #7f5410;
-  --color-accent-800: #5c3d0f;
-  --color-accent-900: #402b0c;
+  --color-accent-50: #ffede7;
+  --color-accent-100: #ffccba;
+  --color-accent-200: #ffb195;
+  --color-accent-300: #ff9974;
+  --color-accent-400: #ff8254;
+  --color-accent-500: #ff6b35;
+  --color-accent-600: #e05d2c;
+  --color-accent-700: #c55024;
+  --color-accent-800: #ab441d;
+  --color-accent-900: #923916;
+  --color-accent-950: #7a2e0f;
 
   --color-ink-50: #f4f6f7;
   --color-ink-100: #e4e9eb;
@@ -34,7 +35,7 @@
   --color-ink-500: #5a6e76;
   --color-ink-700: #324450;
   --color-ink-900: #11212e;
-  --color-ink-950: #0a141c;
+  --color-ink-950: #0a1128;
 
   --color-paper: #fbf8f1;
   --color-paper-dim: #f3eee1;
@@ -68,6 +69,7 @@
   --color-accent-700: var(--color-accent-700);
   --color-accent-800: var(--color-accent-800);
   --color-accent-900: var(--color-accent-900);
+  --color-accent-950: var(--color-accent-950);
 
   --color-ink-50: var(--color-ink-50);
   --color-ink-100: var(--color-ink-100);

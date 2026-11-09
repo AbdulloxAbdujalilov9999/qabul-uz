@@ -14,11 +14,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Qabul — Orzuyingdagi grant yoki universitetga kir",
-    template: "%s | Qabul",
+    default: "UniSprint — Orzuyingdagi grant yoki universitetga kir",
+    template: "%s | UniSprint",
   },
   description:
-    "Qabul - O'zbek o'quvchilari uchun stipendiya mosligi, faoliyatlar ro'yxati, insho murabbiyi va kunlik reja - bir platformada.",
+    "UniSprint - O'zbek o'quvchilari uchun stipendiya mosligi, faoliyatlar ro'yxati, insho murabbiyi va kunlik reja - bir platformada.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

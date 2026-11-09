@@ -7,7 +7,7 @@ export default function SchoolsPage() {
         <Container className="max-w-3xl">
           <Eyebrow>MAKTAB VA LITSEYLAR UCHUN</Eyebrow>
           <h1 className="mt-3 text-4xl font-extrabold text-ink-950">
-            Maslahatchingiz 300 o&apos;quvchini eslab qololmaydi. Qabul eslab qoladi.
+            Maslahatchingiz 300 o&apos;quvchini eslab qololmaydi. UniSprint eslab qoladi.
           </h1>
           <p className="mt-4 text-ink-700">
             Maslahatchi paneli har bir o&apos;quvchining progressini, qaysi insho qoralamasi tiqilib qolganini va
@@ -49,7 +49,7 @@ export default function SchoolsPage() {
           <Eyebrow>MAVJUD TIZIMLAR BILAN MUNOSABAT</Eyebrow>
           <h2 className="mt-3 text-2xl font-extrabold text-ink-950">Bu almashtirish emas, ustiga qo&apos;shimcha.</h2>
           <p className="mt-4 max-w-2xl text-ink-700">
-            Qabul kontingent reestri yoki baholash jurnalini almashtirmaydi. Biz o&apos;quvchining ariza bo&apos;yicha
+            UniSprint kontingent reestri yoki baholash jurnalini almashtirmaydi. Biz o&apos;quvchining ariza bo&apos;yicha
             amalga oshirgan ishini - insho, mavzu, ro&apos;yxat - saqlaymiz, chunki bu ish aynan shu yerda bajariladi.
           </p>
         </Container>

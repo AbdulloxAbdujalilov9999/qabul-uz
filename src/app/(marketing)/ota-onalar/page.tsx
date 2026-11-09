@@ -9,7 +9,7 @@ export default function ParentsPage() {
             <Eyebrow>OTA-ONALAR UCHUN</Eyebrow>
             <h1 className="mt-3 text-4xl font-extrabold text-ink-950">Farzandingiz uchun yiliga bitta narx.</h1>
             <p className="mt-4 text-ink-700">
-              Qabul har bir muddatni rejalashtiradi, insho qoralamalarini tahlil qiladi, grantlarga moslaydi va
+              UniSprint har bir muddatni rejalashtiradi, insho qoralamalarini tahlil qiladi, grantlarga moslaydi va
               faoliyatlar ro&apos;yxatini kuchaytiradi - kuniga bitta kichik dars orqali.
             </p>
             <div className="mt-6">

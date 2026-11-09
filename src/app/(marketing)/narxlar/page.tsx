@@ -20,7 +20,7 @@ export default function PricingPage() {
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-ink-700">
             Xususiy maslahatchilar 15-80 million so&apos;m oladi. Alohida AI vositalar faqat insho uchun oyiga
-            300,000+ so&apos;m. Qabul butun jarayon uchun bitta oddiy narx.
+            300,000+ so&apos;m. UniSprint butun jarayon uchun bitta oddiy narx.
           </p>
         </Container>
       </section>
@@ -68,13 +68,13 @@ export default function PricingPage() {
       <section className="bg-white py-16">
         <Container>
           <Eyebrow>TAQQOSLASH</Eyebrow>
-          <h2 className="mt-3 text-2xl font-extrabold text-ink-950">Qabul boshqalarga nisbatan</h2>
+          <h2 className="mt-3 text-2xl font-extrabold text-ink-950">UniSprint boshqalarga nisbatan</h2>
           <div className="mt-8 overflow-x-auto rounded-2xl border border-ink-900/8">
             <table className="w-full min-w-[640px] text-left text-sm">
               <thead className="bg-ink-50 text-ink-500">
                 <tr>
                   <th className="px-4 py-3 font-semibold">Mezon</th>
-                  <th className="px-4 py-3 font-semibold text-brand-700">Qabul</th>
+                  <th className="px-4 py-3 font-semibold text-brand-700">UniSprint</th>
                   <th className="px-4 py-3 font-semibold">Repetitor</th>
                   <th className="px-4 py-3 font-semibold">Konsalting agentligi</th>
                   <th className="px-4 py-3 font-semibold">Faqat-insho AI</th>

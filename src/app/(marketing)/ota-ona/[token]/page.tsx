@@ -15,10 +15,10 @@ export default async function ParentPayPage(props: PageProps<"/ota-ona/[token]">
     <Container className="max-w-md py-16 text-center">
       <Badge tone="brand">OTA-ONA UCHUN TO&apos;LOV</Badge>
       <h1 className="mt-4 text-2xl font-extrabold text-ink-950">
-        {student?.fullName ?? "Farzandingiz"} Qabulda o&apos;qimoqda.
+        {student?.fullName ?? "Farzandingiz"} UniSprintda o&apos;qimoqda.
       </h1>
       <p className="mt-3 text-ink-700">
-        Ular ariza jarayonini Qabul orqali olib bormoqda - kunlik reja, insho tahlili, grant mosligi va mentorlar.
+        Ular ariza jarayonini UniSprint orqali olib bormoqda - kunlik reja, insho tahlili, grant mosligi va mentorlar.
         To&apos;liq reja uchun yillik to&apos;lovni shu yerdan amalga oshirishingiz mumkin.
       </p>
 

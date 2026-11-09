@@ -1,15 +1,13 @@
 import Link from "next/link";
 import { Container } from "./ui";
+import { Logo } from "./logo";
 
 export function Footer() {
   return (
     <footer className="mt-24 border-t border-ink-900/8 bg-white">
       <Container className="grid gap-10 py-12 text-sm text-ink-700 md:grid-cols-4">
         <div>
-          <div className="flex items-center gap-2 text-base font-extrabold text-ink-950">
-            <span className="grid h-7 w-7 place-items-center rounded-lg bg-brand-700 text-xs text-white">Q</span>
-            Qabul
-          </div>
+          <Logo size="sm" />
           <p className="mt-3 text-ink-500">
             O&apos;zbek o&apos;quvchilari xorijdagi va grant orqali o&apos;qish imkoniyatlarini topishi uchun.
           </p>
@@ -39,7 +37,7 @@ export function Footer() {
         </div>
       </Container>
       <Container className="border-t border-ink-900/8 py-6 text-xs text-ink-500">
-        © 2026 Qabul. Barcha huquqlar himoyalangan.
+        © 2026 UniSprint. Barcha huquqlar himoyalangan.
       </Container>
     </footer>
   );

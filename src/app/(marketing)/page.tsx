@@ -98,7 +98,7 @@ export default function HomePage() {
               <p className="mt-3 text-sm font-semibold text-brand-700">— Yulduz</p>
             </div>
             <p className="mt-6 max-w-lg text-ink-600">
-              Yulduz - Qabulning shaxsiy mentoring yordamchisi. U profilingni o&apos;rganib, maqsadlaringni va dastur
+              Yulduz - UniSprintning shaxsiy mentoring yordamchisi. U profilingni o&apos;rganib, maqsadlaringni va dastur
               ro&apos;yxatingni bilib oladi, so&apos;ng butun jarayonni kuniga bitta bosqichga bo&apos;lib beradi.
             </p>
           </div>
@@ -243,7 +243,7 @@ export default function HomePage() {
           <Eyebrow>NARXLAR OSHKORA</Eyebrow>
           <h2 className="mt-3 text-3xl font-extrabold">Oyiga bir fast-fud kombosi narxida.</h2>
           <p className="mx-auto mt-4 max-w-xl text-ink-100/80">
-            Xususiy maslahatchilar soatiga $50-200 oladi. Qabul butun jarayon uchun oyiga atigi bitta narx.
+            Xususiy maslahatchilar soatiga $50-200 oladi. UniSprint butun jarayon uchun oyiga atigi bitta narx.
           </p>
           <div className="mt-8">
             <Button href="/narxlar" variant="secondary" size="lg">Narxlarni ko&apos;rish</Button>
@@ -262,7 +262,7 @@ export default function HomePage() {
               a="Yo'q. Yulduz har bir qoralamani o'qib, ball, grammatik tuzatish va kuchaytirish yo'llarini beradi - lekin hech qachon qayta yozib bermaydi. Grant beruvchi tashkilot sening so'zlaringni o'qiydi."
             />
             <FAQItem
-              q="Qabul qancha turadi?"
+              q="UniSprint qancha turadi?"
               a="Birinchi 10 dars, barcha testlar va barcha keyslar bepul. To'liq reja oyiga belgilangan narxda - istalgan oy bekor qilish mumkin. Narxlar sahifasida to'liq tafsilot bor."
             />
             <FAQItem

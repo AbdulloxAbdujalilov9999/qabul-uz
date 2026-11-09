@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Map, GraduationCap, PenLine, Star, NotebookText, CircleDollarSign, MessageCircle, Gem, Settings, Flame } from "lucide-react";
 import { getRubyBalance, getStreak } from "@/lib/db";
 import { logOutAction } from "@/lib/actions/auth";
+import { Logo } from "./logo";
 import type { Profile } from "@/lib/types";
 
 const navItems = [
@@ -22,9 +23,8 @@ export async function DashboardShell({ profile, children }: { profile: Profile; 
   return (
     <div className="flex min-h-screen bg-paper">
       <aside className="hidden w-64 shrink-0 border-r border-ink-900/8 bg-white p-5 lg:flex lg:flex-col">
-        <Link href="/" className="flex items-center gap-2 text-lg font-extrabold text-ink-950">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-700 text-sm text-white">Q</span>
-          Qabul
+        <Link href="/">
+          <Logo />
         </Link>
         <nav className="mt-8 flex-1 space-y-1">
           {navItems.map((item) => (
@@ -55,7 +55,7 @@ export async function DashboardShell({ profile, children }: { profile: Profile; 
 
       <div className="flex-1">
         <header className="flex items-center justify-between border-b border-ink-900/8 bg-white px-5 py-3 lg:hidden">
-          <Link href="/" className="font-extrabold text-ink-950">Qabul</Link>
+          <Link href="/"><Logo size="sm" /></Link>
           <div className="flex items-center gap-3 text-xs text-ink-600">
             <span className="flex items-center gap-1"><Flame className="h-3.5 w-3.5 text-accent-500" /> {streak.current}</span>
             <span className="flex items-center gap-1"><Gem className="h-3.5 w-3.5 text-brand-600" /> {rubies}</span>

@@ -1,4 +1,4 @@
-// Yulduz ("star") - Qabul's original mascot. Hand-drawn inline SVG, not a
+// Yulduz ("star") - UniSprint's original mascot. Hand-drawn inline SVG, not a
 // generated raster image: a friendly five-point star wearing a tiny mortarboard.
 export function Mascot({ className }: { className?: string }) {
   return (

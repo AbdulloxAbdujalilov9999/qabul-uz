@@ -1,4 +1,4 @@
-# Qabul
+# UniSprint
 
 A college/scholarship application coaching platform for Uzbek students applying
 abroad — quizzes, a gamified daily lesson plan, an essay coach, scholarship

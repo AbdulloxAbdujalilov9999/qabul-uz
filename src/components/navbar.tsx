@@ -3,6 +3,7 @@ import { getSessionUserId } from "@/lib/session";
 import { getProfile } from "@/lib/db";
 import { logOutAction } from "@/lib/actions/auth";
 import { Container, Button } from "./ui";
+import { Logo } from "./logo";
 
 const links = [
   { href: "/testlar", label: "Testlar" },
@@ -19,9 +20,8 @@ export async function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-ink-900/8 bg-paper/90 backdrop-blur">
       <Container className="flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 text-lg font-extrabold text-ink-950">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-700 text-sm text-white">Q</span>
-          Qabul
+        <Link href="/">
+          <Logo />
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-medium text-ink-700 md:flex">
           {links.map((l) => (
