@@ -3,6 +3,7 @@ import { getSessionUserId } from "@/lib/session";
 import { getEssay, getLatestFeedback } from "@/lib/db";
 import { Container, Card, Badge, Eyebrow } from "@/components/ui";
 import { EssayEditor } from "@/components/essay-editor";
+import { BackButton } from "@/components/back-button";
 
 export default async function EssayDetailPage(props: PageProps<"/ilova/insholarim/[id]">) {
   const { id } = await props.params;
@@ -13,7 +14,8 @@ export default async function EssayDetailPage(props: PageProps<"/ilova/insholari
   const feedback = await getLatestFeedback(essay.id);
 
   return (
-    <Container className="max-w-3xl py-0">
+    <Container className="max-w-3xl py-6">
+      <BackButton className="mb-4" />
       <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
         <EssayEditor essay={essay} />
 

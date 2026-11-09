@@ -3,6 +3,7 @@ import { getSessionUserId } from "@/lib/session";
 import { getConversation, getMessages } from "@/lib/db";
 import { mentors, schools } from "@/lib/seed-data";
 import { Container, Badge } from "@/components/ui";
+import { BackButton } from "@/components/back-button";
 import { sendFollowUpMessage, simulateMentorReply } from "@/lib/actions/messages";
 
 export default async function ConversationPage(props: PageProps<"/ilova/xabarlar/[id]">) {
@@ -16,7 +17,8 @@ export default async function ConversationPage(props: PageProps<"/ilova/xabarlar
   const messages = await getMessages(conversation.id);
 
   return (
-    <Container className="max-w-2xl py-0">
+    <Container className="max-w-2xl py-6">
+      <BackButton className="mb-4" />
       <div className="flex items-center gap-3 border-b border-ink-900/8 pb-4">
         <div className="grid h-10 w-10 place-items-center rounded-full bg-brand-100 font-bold text-brand-700">{mentor.displayName[0]}</div>
         <div>

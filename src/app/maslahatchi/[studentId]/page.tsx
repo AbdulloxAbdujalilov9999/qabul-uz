@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getProfile, getStreak, daysBehind, getLessonProgress, getEssays, getAllFeedbackForEssays, getCollegeList } from "@/lib/db";
 import { lessons, schools } from "@/lib/seed-data";
 import { Card, Badge, Eyebrow } from "@/components/ui";
+import { BackButton } from "@/components/back-button";
 
 export default async function StudentDrawerPage(props: PageProps<"/maslahatchi/[studentId]">) {
   const { studentId } = await props.params;
@@ -22,6 +23,7 @@ export default async function StudentDrawerPage(props: PageProps<"/maslahatchi/[
 
   return (
     <div className="mx-auto max-w-3xl">
+      <BackButton className="mb-4" />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-extrabold text-ink-950">{profile.fullName}</h1>

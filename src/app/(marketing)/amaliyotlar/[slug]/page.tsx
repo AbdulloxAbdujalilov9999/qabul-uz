@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Container, Button, Card } from "@/components/ui";
 import { SchoolBadge } from "@/components/school-badge";
+import { BackButton } from "@/components/back-button";
 import { caseStudies, schools, mentors } from "@/lib/seed-data";
 
 export function generateStaticParams() {
@@ -17,6 +18,7 @@ export default async function CaseStudyDetailPage(props: PageProps<"/amaliyotlar
 
   return (
     <Container className="max-w-3xl py-16">
+      <BackButton className="mb-6" />
       <div className="flex items-center gap-3">
         <SchoolBadge schoolId={study.schoolId} size="md" />
         <span className="font-semibold text-ink-700">{school?.name}</span>

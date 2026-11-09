@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Container, Card, Eyebrow } from "@/components/ui";
 import { MessageMentorForm } from "@/components/message-mentor-form";
 import { SchoolBadge } from "@/components/school-badge";
+import { BackButton } from "@/components/back-button";
 import { mentors, schools, archetypes, caseStudies } from "@/lib/seed-data";
 
 export function generateStaticParams() {
@@ -20,6 +21,7 @@ export default async function MentorDetailPage(props: PageProps<"/mentorlar/[id]
 
   return (
     <Container className="max-w-3xl py-16">
+      <BackButton className="mb-6" />
       <div className="grid gap-8 md:grid-cols-[1fr_280px]">
         <div>
           <div className="flex items-center gap-2.5">

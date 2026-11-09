@@ -4,6 +4,7 @@ import { getLessonProgress, getSubscription } from "@/lib/db";
 import { lessons } from "@/lib/seed-data";
 import { Container, Badge, Button } from "@/components/ui";
 import { CompleteLessonButton } from "@/components/complete-lesson-button";
+import { BackButton } from "@/components/back-button";
 
 export default async function LessonPage(props: PageProps<"/ilova/darslar/[slug]">) {
   const { slug } = await props.params;
@@ -24,6 +25,7 @@ export default async function LessonPage(props: PageProps<"/ilova/darslar/[slug]
 
   return (
     <Container className="max-w-2xl py-6">
+      <BackButton className="mb-4" />
       <Badge tone="brand">{categoryLabel[lesson.category]}</Badge>
       <h1 className="mt-3 text-3xl font-extrabold text-ink-950">{lesson.title}</h1>
       <p className="mt-2 text-ink-600">{lesson.summary}</p>

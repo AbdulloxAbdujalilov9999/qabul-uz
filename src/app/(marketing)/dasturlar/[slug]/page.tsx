@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Container, Card, Eyebrow } from "@/components/ui";
 import { getSchoolMark } from "@/components/school-badge";
+import { BackButton } from "@/components/back-button";
 import { schools, caseStudies, mentors } from "@/lib/seed-data";
 
 export function generateStaticParams() {
@@ -29,6 +30,7 @@ export default async function SchoolDetailPage(props: PageProps<"/dasturlar/[slu
           {abbr}
         </span>
         <Container className="relative max-w-3xl">
+          <BackButton tone="inverted" className="mb-4" />
           <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-bold uppercase tracking-wide backdrop-blur-sm">
             {school.country}{school.city ? ` · ${school.city}` : ""}
           </span>
