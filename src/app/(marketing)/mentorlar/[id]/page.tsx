@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Container, Badge, Card, Eyebrow } from "@/components/ui";
+import { Container, Card, Eyebrow } from "@/components/ui";
 import { MessageMentorForm } from "@/components/message-mentor-form";
+import { SchoolBadge } from "@/components/school-badge";
 import { mentors, schools, archetypes, caseStudies } from "@/lib/seed-data";
 
 export function generateStaticParams() {
@@ -21,7 +22,10 @@ export default async function MentorDetailPage(props: PageProps<"/mentorlar/[id]
     <Container className="max-w-3xl py-16">
       <div className="grid gap-8 md:grid-cols-[1fr_280px]">
         <div>
-          <Badge tone="ink">{school?.name}</Badge>
+          <div className="flex items-center gap-2.5">
+            <SchoolBadge schoolId={mentor.schoolId} size="sm" />
+            <span className="text-sm font-semibold text-ink-500">{school?.name}</span>
+          </div>
           <div className="mt-4 flex items-center gap-4">
             <div className="grid h-16 w-16 place-items-center rounded-full bg-brand-100 text-2xl font-bold text-brand-700">
               {mentor.displayName[0]}

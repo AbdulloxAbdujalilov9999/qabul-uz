@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Container, Card, Badge, Eyebrow } from "@/components/ui";
+import { Container, Card, Eyebrow } from "@/components/ui";
+import { SchoolBadge } from "@/components/school-badge";
 import { mentors, schools } from "@/lib/seed-data";
 
 export const metadata = { title: "Mentorlar" };
@@ -24,7 +25,10 @@ export default function MentorsPage() {
             return (
               <Link key={m.id} href={`/mentorlar/${m.id}`}>
                 <Card className="h-full transition-shadow hover:shadow-md">
-                  <Badge tone="ink">{school?.name}</Badge>
+                  <div className="flex items-center gap-2.5">
+                    <SchoolBadge schoolId={m.schoolId} size="sm" />
+                    <span className="text-xs font-semibold text-ink-500">{school?.name}</span>
+                  </div>
                   <div className="mt-4 flex items-center gap-3">
                     <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand-100 text-base font-bold text-brand-700">
                       {m.displayName[0]}

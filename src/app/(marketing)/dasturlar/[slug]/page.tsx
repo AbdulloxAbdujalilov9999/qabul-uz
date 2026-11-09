@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Container, Badge, Card, Eyebrow } from "@/components/ui";
+import { SchoolBadge } from "@/components/school-badge";
 import { schools, caseStudies, mentors } from "@/lib/seed-data";
 
 export function generateStaticParams() {
@@ -19,7 +20,10 @@ export default async function SchoolDetailPage(props: PageProps<"/dasturlar/[slu
 
   return (
     <Container className="max-w-3xl py-16">
-      <Badge tone="ink">{school.country}</Badge>
+      <div className="flex items-center gap-3">
+        <SchoolBadge schoolId={school.id} size="lg" />
+        <Badge tone="ink">{school.country}</Badge>
+      </div>
       <h1 className="mt-3 text-3xl font-extrabold text-ink-950">{school.name}</h1>
       <p className="mt-2 text-ink-700">{school.description}</p>
       <div className="mt-4 flex flex-wrap gap-1.5">

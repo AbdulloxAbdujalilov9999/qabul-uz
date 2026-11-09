@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container, Card, Badge, Eyebrow } from "@/components/ui";
+import { SchoolBadge } from "@/components/school-badge";
 import { schools, caseStudies } from "@/lib/seed-data";
 
 export const metadata = { title: "Dasturlar" };
@@ -23,7 +24,10 @@ export default function SchoolsDirectoryPage() {
             return (
               <Link key={s.id} href={`/dasturlar/${s.slug}`}>
                 <Card className="h-full transition-shadow hover:shadow-md">
-                  <Badge tone="ink">{kindLabel[s.kind]}</Badge>
+                  <div className="flex items-center justify-between">
+                    <SchoolBadge schoolId={s.id} size="md" />
+                    <Badge tone="ink">{kindLabel[s.kind]}</Badge>
+                  </div>
                   <p className="mt-3 font-bold text-ink-950">{s.name}</p>
                   <p className="text-sm text-ink-500">{s.country}{s.city ? ` · ${s.city}` : ""}</p>
                   <p className="mt-3 text-xs font-semibold text-ink-500">

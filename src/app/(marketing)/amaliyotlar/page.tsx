@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Container, Card, Badge, Eyebrow } from "@/components/ui";
+import { Container, Card, Eyebrow } from "@/components/ui";
+import { SchoolBadge } from "@/components/school-badge";
 import { caseStudies, schools } from "@/lib/seed-data";
 
 export const metadata = { title: "Keyslar" };
@@ -26,7 +27,10 @@ export default function CaseStudiesPage() {
               return (
                 <Link key={c.id} href={`/amaliyotlar/${c.slug}`}>
                   <Card className="h-full transition-shadow hover:shadow-md">
-                    <Badge tone="ink">{school?.name}</Badge>
+                    <div className="flex items-center gap-2.5">
+                      <SchoolBadge schoolId={c.schoolId} size="sm" />
+                      <span className="text-xs font-semibold text-ink-500">{school?.name}</span>
+                    </div>
                     <p className="mt-3 font-bold text-ink-950">{c.title}</p>
                     <p className="mt-2 text-sm text-ink-600">{c.summary}</p>
                     <div className="mt-4 flex flex-wrap gap-1.5">

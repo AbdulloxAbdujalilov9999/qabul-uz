@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { Container, Badge, Button, Card } from "@/components/ui";
+import { Container, Button, Card } from "@/components/ui";
+import { SchoolBadge } from "@/components/school-badge";
 import { caseStudies, schools, mentors } from "@/lib/seed-data";
 
 export function generateStaticParams() {
@@ -16,7 +17,10 @@ export default async function CaseStudyDetailPage(props: PageProps<"/amaliyotlar
 
   return (
     <Container className="max-w-3xl py-16">
-      <Badge tone="ink">{school?.name}</Badge>
+      <div className="flex items-center gap-3">
+        <SchoolBadge schoolId={study.schoolId} size="md" />
+        <span className="font-semibold text-ink-700">{school?.name}</span>
+      </div>
       <h1 className="mt-4 text-3xl font-extrabold text-ink-950">{study.title}</h1>
       <p className="mt-2 text-sm text-ink-500">{study.displayName} · {study.acceptanceCount} ta taklif oldi · ★ {study.rating.toFixed(1)}</p>
 

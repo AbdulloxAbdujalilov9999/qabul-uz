@@ -1,13 +1,28 @@
 import Link from "next/link";
 import { Container, Button, Badge, Card, Eyebrow, FAQItem } from "@/components/ui";
+import { Mascot } from "@/components/mascot";
+import { SchoolBadge } from "@/components/school-badge";
+import { FeatureGrid } from "@/components/feature-grid";
 import { caseStudies, mentors, schools } from "@/lib/seed-data";
 
 export default function HomePage() {
   const previewCases = caseStudies.slice(0, 3);
   const previewMentors = mentors.slice(0, 4);
+  const logoStrip = schools.filter((s) => s.kind === "university").concat(schools.filter((s) => s.kind !== "university"));
 
   return (
     <div>
+      {/* Logo strip */}
+      <section className="overflow-hidden border-b border-ink-900/8 bg-white py-5">
+        <Container>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {logoStrip.map((s) => (
+              <SchoolBadge key={s.id} schoolId={s.id} size="sm" />
+            ))}
+          </div>
+        </Container>
+      </section>
+
       {/* Hero */}
       <section className="overflow-hidden bg-gradient-to-b from-brand-50 to-paper py-20">
         <Container className="grid items-center gap-12 lg:grid-cols-2">
@@ -67,6 +82,26 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* Meet Yulduz */}
+      <section className="bg-white py-20">
+        <Container className="grid items-center gap-10 lg:grid-cols-[220px_1fr]">
+          <Mascot className="mx-auto h-44 w-44 lg:h-52 lg:w-52" />
+          <div>
+            <div className="relative inline-block rounded-2xl border-2 border-ink-900 bg-white px-6 py-5 shadow-[4px_4px_0_0_#11212E]">
+              <p className="text-lg font-medium text-ink-900">
+                &quot;Har bir dasturing uchun muddatni men kuzataman va bugundan topshirish kunigacha bo&apos;lgan
+                yo&apos;lni rejalashtiraman. Senga faqat kuniga bitta kichik darsni bosish qoladi.&quot;
+              </p>
+              <p className="mt-3 text-sm font-semibold text-brand-700">— Yulduz</p>
+            </div>
+            <p className="mt-6 max-w-lg text-ink-600">
+              Yulduz - Qabulning shaxsiy mentoring yordamchisi. U profilingni o&apos;rganib, maqsadlaringni va dastur
+              ro&apos;yxatingni bilib oladi, so&apos;ng butun jarayonni kuniga bitta bosqichga bo&apos;lib beradi.
+            </p>
+          </div>
+        </Container>
+      </section>
+
       {/* Feature: scholarship matching */}
       <FeatureRow
         eyebrow="GRANT MOSLIGI"
@@ -98,6 +133,8 @@ export default function HomePage() {
         body="Har bir muddat avtomatik tortib olinadi, har bir kun kichik darsga bo'linadi - dastur tanlashdan topshirishgacha. Diqqat rejimi yoqilganda ijtimoiy tarmoqlar darsni tugatmaguningcha eslatma bilan to'xtatib turadi."
         bullets={["Illyustratsiyali xarita bo'ylab yurish", "Diqqat rejimi (Focus Mode) orqali chalg'ituvchi ilovalarni eslatma bilan to'xtatish", "Yaqinlaringga avtomatik signal (Himoya tizimi)"]}
       />
+
+      <FeatureGrid />
 
       {/* How it works */}
       <section className="bg-white py-20">
@@ -133,19 +170,26 @@ export default function HomePage() {
             <Button href="/amaliyotlar" variant="outline">Barcha keyslarni ko&apos;rish</Button>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {previewCases.map((c) => (
-              <Link key={c.id} href={`/amaliyotlar/${c.slug}`}>
-                <Card className="h-full transition-shadow hover:shadow-md">
-                  <p className="font-bold text-ink-950">{c.title}</p>
-                  <p className="mt-2 text-sm text-ink-600">{c.summary}</p>
-                  <div className="mt-4 flex gap-2 text-xs text-ink-500">
-                    <span>{c.acceptanceCount} taklif</span>
-                    <span>·</span>
-                    <span>★ {c.rating.toFixed(1)}</span>
-                  </div>
-                </Card>
-              </Link>
-            ))}
+            {previewCases.map((c) => {
+              const school = schools.find((s) => s.id === c.schoolId);
+              return (
+                <Link key={c.id} href={`/amaliyotlar/${c.slug}`}>
+                  <Card className="h-full transition-shadow hover:shadow-md">
+                    <div className="flex items-center gap-2.5">
+                      <SchoolBadge schoolId={c.schoolId} size="sm" />
+                      <span className="text-xs font-semibold text-ink-500">{school?.name}</span>
+                    </div>
+                    <p className="mt-3 font-bold text-ink-950">{c.title}</p>
+                    <p className="mt-2 text-sm text-ink-600">{c.summary}</p>
+                    <div className="mt-4 flex gap-2 text-xs text-ink-500">
+                      <span>{c.acceptanceCount} taklif</span>
+                      <span>·</span>
+                      <span>★ {c.rating.toFixed(1)}</span>
+                    </div>
+                  </Card>
+                </Link>
+              );
+            })}
           </div>
         </Container>
       </section>
@@ -166,8 +210,13 @@ export default function HomePage() {
               return (
                 <Link key={m.id} href={`/mentorlar/${m.id}`}>
                   <Card className="h-full text-center transition-shadow hover:shadow-md">
-                    <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-brand-100 text-lg font-bold text-brand-700">
-                      {m.displayName[0]}
+                    <div className="relative mx-auto h-14 w-14">
+                      <div className="grid h-14 w-14 place-items-center rounded-full bg-brand-100 text-lg font-bold text-brand-700">
+                        {m.displayName[0]}
+                      </div>
+                      <div className="absolute -bottom-1 -right-1 rounded-md ring-2 ring-white">
+                        <SchoolBadge schoolId={m.schoolId} size="xs" />
+                      </div>
                     </div>
                     <p className="mt-3 font-semibold text-ink-900">{m.displayName}</p>
                     <p className="text-xs text-ink-500">{school?.name} · {m.classYear}</p>
