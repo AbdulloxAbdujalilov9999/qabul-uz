@@ -43,6 +43,16 @@ export interface School {
   tags: string[];
   deadlines: SchoolDeadline[];
   featured?: boolean;
+  // Typical document/requirement categories for this program - approximate,
+  // not a guarantee; always verify on the institution's own site.
+  requirements?: string[];
+  // How applications for this program are actually submitted, e.g. "UCAS
+  // orqali", "Common App orqali", "Universitet saytidan to'g'ridan-to'g'ri".
+  applySystem?: string;
+  // A verified link to the real application portal. Left unset until a
+  // real, checked URL is supplied - never guessed, since a wrong link here
+  // would mislead a student's actual application.
+  applyUrl?: string;
 }
 
 export type ListBucket = "reach" | "target" | "safety";

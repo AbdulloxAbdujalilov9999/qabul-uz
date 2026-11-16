@@ -1,7 +1,8 @@
-import { TriangleAlert } from "lucide-react";
+import Link from "next/link";
+import { TriangleAlert, Users, FileText } from "lucide-react";
 import { getSessionUserId } from "@/lib/session";
 import { getCollegeList } from "@/lib/db";
-import { schools } from "@/lib/seed-data";
+import { schools, mentors } from "@/lib/seed-data";
 import { Card, Badge, Eyebrow } from "@/components/ui";
 import { AddToListButtons, RemoveFromListButton } from "@/components/college-list-controls";
 
@@ -40,20 +41,33 @@ export default async function CollegeListPage() {
 
       <div className="mt-6 space-y-3">
         {withDeadlines.length === 0 && <p className="text-sm text-ink-500">Hali hech narsa qo&apos;shilmagan. Pastdan tanlang.</p>}
-        {withDeadlines.map(({ entry, school, nextDeadline }) => (
-          <Card key={entry.id} className="flex items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <Badge tone={bucketTone[entry.bucket ?? "target"]}>{bucketLabel[entry.bucket ?? "target"]}</Badge>
-                <p className="font-semibold text-ink-900">{school.name}</p>
+        {withDeadlines.map(({ entry, school, nextDeadline }) => {
+          const schoolMentors = mentors.filter((m) => m.schoolId === school.id);
+          return (
+            <Card key={entry.id} className="flex items-center justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2">
+                  <Badge tone={bucketTone[entry.bucket ?? "target"]}>{bucketLabel[entry.bucket ?? "target"]}</Badge>
+                  <p className="font-semibold text-ink-900">{school.name}</p>
+                </div>
+                <p className="mt-1 text-xs text-ink-500">
+                  {nextDeadline ? `Muddat: ${new Date(nextDeadline.date).toLocaleDateString("uz-UZ")} (${nextDeadline.label})` : "Muddat belgilanmagan"}
+                </p>
+                <div className="mt-2 flex flex-wrap items-center gap-3 text-xs">
+                  <Link href={`/dasturlar/${school.slug}`} className="flex items-center gap-1 font-medium text-brand-700 hover:underline">
+                    <FileText className="h-3.5 w-3.5" /> Talablar va tayyorgarlik
+                  </Link>
+                  {schoolMentors.length > 0 && (
+                    <Link href={`/mentorlar/${schoolMentors[0].id}`} className="flex items-center gap-1 font-medium text-brand-700 hover:underline">
+                      <Users className="h-3.5 w-3.5" /> Mos mentor: {schoolMentors[0].displayName}
+                    </Link>
+                  )}
+                </div>
               </div>
-              <p className="mt-1 text-xs text-ink-500">
-                {nextDeadline ? `Muddat: ${new Date(nextDeadline.date).toLocaleDateString("uz-UZ")} (${nextDeadline.label})` : "Muddat belgilanmagan"}
-              </p>
-            </div>
-            <RemoveFromListButton entryId={entry.id} />
-          </Card>
-        ))}
+              <RemoveFromListButton entryId={entry.id} />
+            </Card>
+          );
+        })}
       </div>
 
       <div className="mt-10">

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { FileCheck, ExternalLink } from "lucide-react";
 import { Container, Card, Eyebrow } from "@/components/ui";
 import { getSchoolMark } from "@/components/school-badge";
 import { BackButton } from "@/components/back-button";
@@ -57,6 +58,36 @@ export default async function SchoolDetailPage(props: PageProps<"/dasturlar/[slu
           <p className="text-xs text-ink-500">Sanalar taxminiy - albatta rasmiy manbada tekshiring.</p>
         </div>
       </section>
+
+      {(school.requirements?.length || school.applySystem) && (
+        <section className="mt-10">
+          <Eyebrow>TALABLAR VA ARIZA</Eyebrow>
+          <Card className="mt-4">
+            {school.applySystem && (
+              <p className="flex items-center gap-2 text-sm font-semibold text-ink-900">
+                {school.applyUrl ? (
+                  <a href={school.applyUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-brand-700 hover:underline">
+                    {school.applySystem} <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                ) : (
+                  school.applySystem
+                )}
+              </p>
+            )}
+            {school.requirements && school.requirements.length > 0 && (
+              <ul className="mt-3 space-y-2">
+                {school.requirements.map((r) => (
+                  <li key={r} className="flex items-start gap-2 text-sm text-ink-700">
+                    <FileCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
+                    {r}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <p className="mt-4 text-xs text-ink-500">Talablar umumiy ro&apos;yxat - har bir yo&apos;nalish uchun aniq talablarni dastur rasmiy saytida tekshiring.</p>
+          </Card>
+        </section>
+      )}
 
       {relatedCases.length > 0 && (
         <section className="mt-10">

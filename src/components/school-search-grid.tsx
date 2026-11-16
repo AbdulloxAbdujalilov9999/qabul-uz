@@ -16,12 +16,22 @@ export interface SchoolCardData {
 
 export function SchoolSearchGrid({ schools }: { schools: SchoolCardData[] }) {
   const [query, setQuery] = useState("");
+  const [country, setCountry] = useState<string | null>(null);
+
+  const countries = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const s of schools) counts.set(s.country, (counts.get(s.country) ?? 0) + 1);
+    return Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
+  }, [schools]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return schools;
-    return schools.filter((s) => s.name.toLowerCase().includes(q) || s.country.toLowerCase().includes(q));
-  }, [schools, query]);
+    return schools.filter((s) => {
+      const matchesQuery = !q || s.name.toLowerCase().includes(q) || s.country.toLowerCase().includes(q);
+      const matchesCountry = !country || s.country === country;
+      return matchesQuery && matchesCountry;
+    });
+  }, [schools, query, country]);
 
   return (
     <div>
@@ -33,6 +43,28 @@ export function SchoolSearchGrid({ schools }: { schools: SchoolCardData[] }) {
           placeholder="Dasturlarni qidirish..."
           className="w-full rounded-full border border-ink-900/15 bg-white py-3 pl-11 pr-4 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
         />
+      </div>
+
+      <div className="mt-5 flex flex-wrap gap-2">
+        <button
+          onClick={() => setCountry(null)}
+          className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-colors ${
+            country === null ? "bg-brand-700 text-white" : "bg-white text-ink-600 ring-1 ring-ink-900/10 hover:bg-brand-50"
+          }`}
+        >
+          Barcha davlatlar
+        </button>
+        {countries.map(([c, count]) => (
+          <button
+            key={c}
+            onClick={() => setCountry(c === country ? null : c)}
+            className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-colors ${
+              country === c ? "bg-brand-700 text-white" : "bg-white text-ink-600 ring-1 ring-ink-900/10 hover:bg-brand-50"
+            }`}
+          >
+            {c} <span className="opacity-60">{count}</span>
+          </button>
+        ))}
       </div>
 
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
