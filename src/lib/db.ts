@@ -18,6 +18,7 @@ import type {
   ParentPaymentLink,
   Profile,
   QuizSlug,
+  Recommender,
   Role,
   SafetyNestContact,
   Streak,
@@ -173,6 +174,11 @@ export async function removeFromCollegeListDb(userId: string, entryId: string) {
   await supabase.from("college_list_entries").delete().eq("id", entryId).eq("user_id", userId);
 }
 
+export async function updateCollegeListStatusDb(userId: string, entryId: string, status: CollegeListEntry["status"]) {
+  const supabase = await createClient();
+  await supabase.from("college_list_entries").update({ status }).eq("id", entryId).eq("user_id", userId);
+}
+
 // ---- Essays ----
 
 function toEssay(row: Record<string, unknown>): Essay {
@@ -291,6 +297,32 @@ export async function addExtracurricularDb(userId: string, title: string, role: 
 export async function removeExtracurricularDb(userId: string, id: string) {
   const supabase = await createClient();
   await supabase.from("extracurriculars").delete().eq("id", id).eq("user_id", userId);
+}
+
+// ---- Recommenders ----
+
+export async function getRecommenders(userId: string): Promise<Recommender[]> {
+  const supabase = await createClient();
+  const { data } = await supabase.from("recommenders").select("*").eq("user_id", userId).order("created_at");
+  return (data ?? []).map((r) => ({
+    id: r.id, userId: r.user_id, name: r.name, relationship: r.relationship ?? "", email: r.email ?? "",
+    bragSheet: r.brag_sheet ?? undefined, status: r.status as Recommender["status"],
+  }));
+}
+
+export async function addRecommenderDb(userId: string, name: string, relationship: string, email: string) {
+  const supabase = await createClient();
+  await supabase.from("recommenders").insert({ user_id: userId, name, relationship, email });
+}
+
+export async function setRecommenderStatusDb(userId: string, id: string, status: Recommender["status"]) {
+  const supabase = await createClient();
+  await supabase.from("recommenders").update({ status }).eq("id", id).eq("user_id", userId);
+}
+
+export async function removeRecommenderDb(userId: string, id: string) {
+  const supabase = await createClient();
+  await supabase.from("recommenders").delete().eq("id", id).eq("user_id", userId);
 }
 
 // ---- Journal ----

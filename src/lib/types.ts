@@ -63,7 +63,7 @@ export interface CollegeListEntry {
   schoolId: string;
   bucket: ListBucket;
   chosenRound?: string;
-  status: "planning" | "in_progress" | "submitted" | "decided";
+  status: "planning" | "in_progress" | "submitted" | "under_review" | "admitted" | "waitlisted" | "declined";
   createdAt: string;
 }
 

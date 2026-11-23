@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Map, GraduationCap, PenLine, Star, NotebookText, CircleDollarSign, MessageCircle, Gem, Settings, Flame } from "lucide-react";
+import { Map, GraduationCap, PenLine, Star, UserCheck, GitCompare, NotebookText, CircleDollarSign, MessageCircle, Gem, Settings, Flame } from "lucide-react";
 import { getRubyBalance, getStreak } from "@/lib/db";
 import { logOutAction } from "@/lib/actions/auth";
 import { Logo } from "./logo";
@@ -8,8 +8,10 @@ import type { Profile } from "@/lib/types";
 const navItems = [
   { href: "/ilova", label: "Bugungi reja", icon: Map },
   { href: "/ilova/royxatim", label: "Dasturlarim", icon: GraduationCap },
+  { href: "/ilova/solishtirish", label: "Taqqoslash", icon: GitCompare },
   { href: "/ilova/insholarim", label: "Insholarim", icon: PenLine },
   { href: "/ilova/faoliyatlarim", label: "Faoliyatlarim", icon: Star },
+  { href: "/ilova/tavsiyanoma", label: "Tavsiyanomalar", icon: UserCheck },
   { href: "/ilova/kundalik", label: "Kundalik", icon: NotebookText },
   { href: "/ilova/grantlar", label: "Grantlarim", icon: CircleDollarSign },
   { href: "/ilova/xabarlar", label: "Xabarlar", icon: MessageCircle },

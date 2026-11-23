@@ -48,7 +48,7 @@ export function Button({
   );
 }
 
-export function Badge({ children, tone = "brand" }: { children: ReactNode; tone?: "brand" | "accent" | "ink" | "placeholder" }) {
+export function Badge({ children, tone = "brand" }: { children: ReactNode; tone?: "brand" | "accent" | "ink" | "placeholder" | "good" | "bad" }) {
   return (
     <span
       className={clsx(
@@ -56,7 +56,9 @@ export function Badge({ children, tone = "brand" }: { children: ReactNode; tone?
         tone === "brand" && "bg-brand-100 text-brand-800",
         tone === "accent" && "bg-accent-100 text-accent-800",
         tone === "ink" && "bg-ink-100 text-ink-700",
-        tone === "placeholder" && "bg-amber-100 text-amber-800"
+        tone === "placeholder" && "bg-amber-100 text-amber-800",
+        tone === "good" && "bg-emerald-100 text-emerald-800",
+        tone === "bad" && "bg-red-100 text-red-700"
       )}
     >
       {children}

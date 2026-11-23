@@ -1,8 +1,9 @@
 "use client";
 
 import { useTransition } from "react";
-import { addToCollegeList, removeFromCollegeList } from "@/lib/actions/college-list";
-import type { ListBucket } from "@/lib/types";
+import { addToCollegeList, removeFromCollegeList, updateCollegeListStatus } from "@/lib/actions/college-list";
+import type { CollegeListEntry, ListBucket } from "@/lib/types";
+import { STATUS_ORDER, STATUS_META } from "@/lib/application-status";
 
 const buckets: { value: ListBucket; label: string }[] = [
   { value: "reach", label: "Reach" },
@@ -25,6 +26,22 @@ export function AddToListButtons({ schoolId }: { schoolId: string }) {
         </button>
       ))}
     </div>
+  );
+}
+
+export function CollegeStatusSelect({ entryId, status }: { entryId: string; status: CollegeListEntry["status"] }) {
+  const [pending, startTransition] = useTransition();
+  return (
+    <select
+      value={status}
+      disabled={pending}
+      onChange={(e) => startTransition(() => updateCollegeListStatus(entryId, e.target.value as CollegeListEntry["status"]))}
+      className="rounded-full border border-ink-900/15 bg-white px-2.5 py-1 text-xs font-medium text-ink-700 outline-none focus:border-brand-500"
+    >
+      {STATUS_ORDER.map((s) => (
+        <option key={s} value={s}>{STATUS_META[s].label}</option>
+      ))}
+    </select>
   );
 }
 
